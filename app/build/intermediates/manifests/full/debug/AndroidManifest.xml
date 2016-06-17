@@ -14,7 +14,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.tuanhuynh.qwallet.MainActivity" >
+        <activity android:name="com.example.tuanhuynh.qwallet.activity.MainActivity" >
+        </activity>
+        <activity android:name="com.example.tuanhuynh.qwallet.activity.PasscodeLockActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

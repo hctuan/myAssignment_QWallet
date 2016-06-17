@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/button_size"
+    android:layout_height="@dimen/button_size"
+    android:gravity="center"
+    >
+
+    <TextView
+        android:id="@+id/txt_number"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        tools:text="Text"
+        tools:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+        android:background="@drawable/circular_button_selector"/>
+
+</RelativeLayout>

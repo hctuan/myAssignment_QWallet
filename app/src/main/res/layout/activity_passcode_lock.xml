@@ -1,12 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.tuanhuynh.qwallet.PasscodeLockActivity">
+    android:orientation="horizontal"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".activity.PasscodeLockActivity">
+
+
+         <RadioButton
+             android:textColorLink="@color/colorWhite"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text=""
+             android:id="@+id/radioButton1"
+             android:layout_alignTop="@+id/radioButton2"
+             android:layout_toLeftOf="@+id/radioButton2"
+             android:layout_toStartOf="@+id/radioButton2"
+             android:textColorHint="@color/colorWhite"
+             android:textColor="@color/colorWhite"
+             android:textColorHighlight="@color/colorWhite" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/radioButton2"
+            android:layout_alignTop="@+id/radioButton3"
+            android:layout_toLeftOf="@+id/radioButton3"
+            android:layout_toStartOf="@+id/radioButton3" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/radioButton3"
+            android:layout_alignTop="@+id/radioButton4"
+            android:layout_centerHorizontal="true" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/radioButton4"
+            android:layout_alignTop="@+id/radioButton5"
+            android:layout_toRightOf="@+id/radioButton3"
+            android:layout_toEndOf="@+id/radioButton3" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/radioButton5"
+            android:layout_below="@+id/txt_title_enter_password"
+            android:layout_toRightOf="@+id/radioButton4"
+            android:layout_toEndOf="@+id/radioButton4" />
+
+    <GridView
+        android:id="@+id/grid_button_ontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:numColumns="3"
+        android:layout_below="@+id/txt_title_enter_password"
+        android:layout_marginTop="61dp"
+        android:layout_alignLeft="@+id/txt_title_passcode_lock"
+        android:layout_alignStart="@+id/txt_title_passcode_lock"
+        android:layout_alignRight="@+id/txt_title_passcode_lock"
+        android:layout_alignEnd="@+id/txt_title_passcode_lock">
+    </GridView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your passcode"
+        android:id="@+id/txt_title_enter_password"
+        android:textSize="20dp"
+        android:layout_below="@+id/txt_title_passcode_lock"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Passcode Lock"
+        android:id="@+id/txt_title_passcode_lock"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:textColor="@color/colorWhite"/>
+
 
 </RelativeLayout>
