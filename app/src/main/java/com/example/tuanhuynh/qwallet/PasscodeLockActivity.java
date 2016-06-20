@@ -1,4 +1,4 @@
-package com.example.tuanhuynh.qwallet.activity;
+package com.example.tuanhuynh.qwallet;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,9 +11,7 @@ import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.example.tuanhuynh.qwallet.R;
 import com.example.tuanhuynh.qwallet.adapter.CustomAdapterPasscode;
-
 
 public class PasscodeLockActivity extends Activity {
 
@@ -141,12 +139,6 @@ public class PasscodeLockActivity extends Activity {
         Intent myIntent=new Intent(this, MainActivity.class);
         startActivity(myIntent);
         finish();
-    }
-
-    private static PasscodeLockActivity passActivity = null;
-
-    public static PasscodeLockActivity getPasscodeActivity() {
-        return passActivity;
     }
 
 }

@@ -44,12 +44,20 @@
         "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\src\\main\\res\\drawable\\circular_button_selected.xml"
     },
     {
+        "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\edit.png",
+        "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\src\\main\\res\\drawable\\edit.png"
+    },
+    {
         "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_top_material.xml",
         "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_cab_background_top_material.xml"
     },
     {
         "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\circular_button_selector.xml",
         "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\src\\main\\res\\drawable\\circular_button_selector.xml"
+    },
+    {
+        "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\insert.png",
+        "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\src\\main\\res\\drawable\\insert.png"
     },
     {
         "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
@@ -84,6 +92,10 @@
         "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
     },
     {
+        "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\delete.png",
+        "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\src\\main\\res\\drawable\\delete.png"
+    },
+    {
         "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_edit_text_material.xml",
         "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_edit_text_material.xml"
     },
@@ -98,6 +110,10 @@
     {
         "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_colored_material.xml",
         "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\drawable\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\report.png",
+        "source": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\src\\main\\res\\drawable\\report.png"
     },
     {
         "merged": "C:\\Users\\tuan.huynh\\myApp\\myAssignment\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_indicator_material.xml",

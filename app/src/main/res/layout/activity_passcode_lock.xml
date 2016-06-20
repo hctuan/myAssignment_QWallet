@@ -4,9 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/colorPrimaryDark"
-    tools:context=".activity.PasscodeLockActivity">
+    tools:context=".PasscodeLockActivity">
 
-
+    <GridView
+        android:id="@+id/grid_button_ontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:numColumns="3"
+        android:layout_below="@+id/txt_title_enter_password"
+        android:layout_marginTop="61dp"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"
+        android:layout_alignLeft="@+id/txt_title_passcode_lock"
+        android:layout_alignStart="@+id/txt_title_passcode_lock"
+        android:layout_alignRight="@+id/txt_title_passcode_lock"
+        android:layout_alignEnd="@+id/txt_title_passcode_lock">
+    </GridView>
+    
          <RadioButton
              android:textColorLink="@color/colorWhite"
              android:layout_width="wrap_content"
@@ -53,20 +68,6 @@
             android:layout_below="@+id/txt_title_enter_password"
             android:layout_toRightOf="@+id/radioButton4"
             android:layout_toEndOf="@+id/radioButton4" />
-
-    <GridView
-        android:id="@+id/grid_button_ontainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:numColumns="3"
-        android:layout_below="@+id/txt_title_enter_password"
-        android:layout_marginTop="61dp"
-        android:layout_alignLeft="@+id/txt_title_passcode_lock"
-        android:layout_alignStart="@+id/txt_title_passcode_lock"
-        android:layout_alignRight="@+id/txt_title_passcode_lock"
-        android:layout_alignEnd="@+id/txt_title_passcode_lock">
-    </GridView>
 
     <TextView
         android:layout_width="wrap_content"

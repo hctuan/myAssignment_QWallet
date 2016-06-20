@@ -22,6 +22,14 @@ MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\my
 MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
 MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:22:5-20
+MERGED from [com.github.jonisaa:MaterialCalendarview:v1.2.2] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.github.jonisaa\MaterialCalendarview\v1.2.2\AndroidManifest.xml:11:5-14:19
+MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:22:5-20
 	android:supportsRtl
 		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:9:9-35
 	android:label
@@ -32,26 +40,38 @@ MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\my
 		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:7:9-43
 	android:theme
 		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:10:9-40
-activity#com.example.tuanhuynh.qwallet.activity.MainActivity
+activity#com.example.tuanhuynh.qwallet.MainActivity
 ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:9-13:20
 	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:19-56
-activity#com.example.tuanhuynh.qwallet.activity.PasscodeLockActivity
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:14:9-21:20
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:19-47
+activity#com.example.tuanhuynh.qwallet.PasscodeLockActivity
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:14:9-20:20
 	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:14:19-64
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:14:19-55
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:16:13-20:29
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:15:13-19:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:17:17-69
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:16:17-69
 	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:17:25-66
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:16:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:19:17-77
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:17-77
 	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:19:27-74
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:27-74
+activity#com.example.tuanhuynh.qwallet.AddNewActivity
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:21:9-61
+	android:name
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:21:19-49
 uses-sdk
 INJECTED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:20:5-43
+MERGED from [com.github.jonisaa:MaterialCalendarview:v1.2.2] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.github.jonisaa\MaterialCalendarview\v1.2.2\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\AndroidManifest.xml:5:5-44
 MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:5:5-43
