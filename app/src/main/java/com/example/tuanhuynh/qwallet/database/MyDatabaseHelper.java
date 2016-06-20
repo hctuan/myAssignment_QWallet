@@ -206,8 +206,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void createDefaultToTest()  {
         int count = this.getCount();
         if(count ==0 ) {
-            ItemFinance f1 = new ItemFinance("cinema","Xem phim","11/11/2011",200000);
-            ItemFinance f2 = new ItemFinance("orther","Trúng số","5/5/2015",1000000);
+            ItemFinance f1 = new ItemFinance("cinema","Xem phim","06/06/2016",200000);
+            ItemFinance f2 = new ItemFinance("orther","Trúng số","16/06/2016",1000000);
             this.addFinance(f1);
             this.addFinance(f2);
         }

@@ -19,6 +19,7 @@ import com.example.tuanhuynh.qwallet.objects.ItemFinance;
 public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
 
     Context context;
+    List<ItemFinance> items;
 
     public ItemFinanceAdapter(Context context, int resourceId,
                               List<ItemFinance> items) {
@@ -32,6 +33,10 @@ public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
         TextView txtTitle;
         TextView txtDate;
         TextView txtMoney;
+    }
+
+    public List<ItemFinance> getData() {
+        return items;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {

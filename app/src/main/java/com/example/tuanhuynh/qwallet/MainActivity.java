@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.Menu;
@@ -17,15 +18,25 @@ import android.widget.Toast;
 import com.example.tuanhuynh.qwallet.adapter.ItemFinanceAdapter;
 import com.example.tuanhuynh.qwallet.database.MyDatabaseHelper;
 import com.example.tuanhuynh.qwallet.objects.ItemFinance;
+import com.samsistemas.calendarview.widget.CalendarView;
+import com.samsistemas.calendarview.widget.DayView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends ActionBarActivity implements
     AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     ListView listView;
     List<ItemFinance> rowItems = new ArrayList<ItemFinance>();
+    CalendarView calendarView;
+    String dateSelected;
+    MyDatabaseHelper db;
+    ItemFinanceAdapter adapter;
 
 
     //Called when the activity is first created
@@ -35,20 +46,70 @@ public class MainActivity extends ActionBarActivity implements
         setContentView(R.layout.activity_main);
 
         //tạo database và thêm vào dữ liệu mặc định
-        MyDatabaseHelper db = new MyDatabaseHelper(this);
+        db = new MyDatabaseHelper(this);
         db.createDefaultToTest();
+
+        calendarView = (CalendarView) findViewById(R.id.calendar_view);
+
+        calendarView.setFirstDayOfWeek(Calendar.MONDAY);
+        calendarView.setIsOverflowDateVisible(true);
+        calendarView.setCurrentDay(new Date(System.currentTimeMillis()));
+        calendarView.setBackButtonColor(R.color.colorAccent);
+        calendarView.setNextButtonColor(R.color.colorAccent);
+        calendarView.refreshCalendar(Calendar.getInstance(Locale.getDefault()));
+        calendarView.setOnDateSelectedListener(new CalendarView.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull Date selectedDate) {
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                dateSelected = df.format(selectedDate);
+                Toast.makeText(getBaseContext(), dateSelected, Toast.LENGTH_LONG).show();
+                reloadListview();
+            }
+
+//            @Override
+//            public void onDateClick(@NonNull Date selectedDate) {
+//                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+//                //textView.setText(df.format(selectedDate));
+//            }
+        });
+
+//        calendarView.setOnMonthChangedListener(new CalendarView.OnMonthChangedListener() {
+//            @Override
+//            public void onMonthChanged(@NonNull Date monthDate) {
+//                SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+//                if (null != actionBar)
+//                    actionBar.setTitle(df.format(monthDate));
+//            }
+//        });
+        final DayView dayView = calendarView.findViewByDate(new Date(System.currentTimeMillis()));
+        if(null != dayView)
+            dateSelected = dayView.getText().toString() + "/" + calendarView.getCurrentMonth() + "/" +  calendarView.getCurrentYear();
+            Toast.makeText(getApplicationContext(), "Today is: " + dayView.getText().toString() + "/" + calendarView.getCurrentMonth() + "/" +  calendarView.getCurrentYear(), Toast.LENGTH_SHORT).show();
+
         //lấy tất cả dữ liệu đổ vào list
         //List<ItemFinance> list = db.getAll();
         //Lấy dữ liệu theo ngày
-        List<ItemFinance> list = db.getByDate("5/5/2015");
+        List<ItemFinance> list = db.getByDate(dateSelected);
         this.rowItems.addAll(list);
 
         listView = (ListView) findViewById(R.id.list);
-        ItemFinanceAdapter adapter = new ItemFinanceAdapter(this,
+        adapter = new ItemFinanceAdapter(this,
                 R.layout.list_item, rowItems);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
         listView.setOnItemLongClickListener(this);
+    }
+
+    private void reloadListview(){
+        // get new modified random data
+        List<ItemFinance> newList = db.getByDate(dateSelected);
+        // update data in our adapter
+        this.adapter.clear();
+        this.adapter.addAll(newList);
+        // fire the event
+        if(newList.size()<1)
+            Toast.makeText(getBaseContext(), "NULL", Toast.LENGTH_LONG).show();
+        adapter.notifyDataSetChanged();
     }
 
     @Override

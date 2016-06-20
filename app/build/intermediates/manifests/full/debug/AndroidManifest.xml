@@ -17,13 +17,14 @@
         <activity android:name="com.example.tuanhuynh.qwallet.MainActivity" >
         </activity>
         <activity android:name="com.example.tuanhuynh.qwallet.PasscodeLockActivity" >
+        </activity>
+        <activity android:name="com.example.tuanhuynh.qwallet.AddNewActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.tuanhuynh.qwallet.AddNewActivity" />
     </application>
 
 </manifest>

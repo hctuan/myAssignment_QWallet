@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,105 +7,156 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.yobbopel.myapplication.AddNewActivity">
+    tools:context="com.example.yobbopel.myapplication.AddNewActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <info.hoang8f.android.segmented.SegmentedGroup
-        xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/segmented"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        segmentedgroup:sc_border_width="2dp"
-        segmentedgroup:sc_corner_radius="10dp"
-        segmentedgroup:sc_tint_color="@color/colorAccent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_height="60dp"
+        android:background="@drawable/radius_layout"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="INCOME"
+            android:id="@+id/txt_income"
+            android:layout_weight="0.5"
+            android:background="@drawable/incom_button_selected"
+            android:layout_above="@+id/edit_note"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center" />
 
-        <RadioButton
-            android:id="@+id/btn_income"
-            android:layout_width="@dimen/switch_size"
-            android:layout_height="wrap_content"
-            android:text="Income"
-            style="@style/RadioButton"
-            android:layout_weight="1"
-            android:checked="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="EXPENSE"
+            android:id="@+id/txt_expense"
+            android:layout_weight="0.5"
+            android:background="@drawable/expense_button_selected"
+            android:layout_above="@+id/txt_income"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center" />
+    </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/btn_expense"
-            android:layout_width="@dimen/switch_size"
-            android:layout_height="wrap_content"
-            android:text="Expense"
-            style="@style/RadioButton"
-            android:layout_weight="1"
-            android:checked="false" />
-    </info.hoang8f.android.segmented.SegmentedGroup>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0,000 VND"
         android:id="@+id/txt_set_money"
-        android:layout_below="@+id/segmented"
+        android:textSize="40dp"
+        android:layout_below="@+id/gridview_income_expence"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
-        android:textSize="40dp" />
+        android:gravity="center" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Note"
+            android:id="@+id/txt_note"
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:layout_below="@+id/txt_set_money" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Date"
+            android:id="@+id/txt_date"
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:layout_below="@+id/txt_set_money" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Catelory"
+            android:id="@+id/txt_calory"
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:layout_below="@+id/txt_set_money"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Note"
-        android:id="@+id/textView"
-        android:textColor="#000000"
-        android:textSize="25dp"
-        android:layout_below="@+id/txt_set_money"
-        android:layout_marginLeft="10dp"
-        android:layout_margin="10dp" />
+        android:layout_gravity="center_horizontal"
+        android:weightSum="4"
+        android:layout_weight="1.07">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Date"
-        android:id="@+id/textView2"
-        android:textColor="#000000"
-        android:textSize="25dp"
-        android:layout_below="@+id/textView"
-        android:layout_marginLeft="10dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:weightSum="4"
+            android:layout_gravity="center_vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Catelory"
-        android:id="@+id/textView4"
-        android:textColor="#000000"
-        android:textSize="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+            </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_note"
-        android:text="note"
-        android:layout_below="@+id/txt_set_money"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/textView4"
-        android:layout_toEndOf="@+id/textView4" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"></LinearLayout>
 
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignLeft="@+id/edit_note"
-        android:layout_alignStart="@+id/edit_note"
-        android:layout_below="@+id/textView4" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"></LinearLayout>
 
-</RelativeLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"></LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"></LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
