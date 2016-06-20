@@ -11,17 +11,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.tuanhuynh.qwallet.R;
-import com.example.tuanhuynh.qwallet.objects.Item;
+import com.example.tuanhuynh.qwallet.objects.ItemFinance;
 
 /**
  * Created by YobboPEL on 18/06/2016.
  */
-public class ItemAdapter extends ArrayAdapter<Item> {
+public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
 
     Context context;
 
-    public ItemAdapter(Context context, int resourceId,
-                       List<Item> items) {
+    public ItemFinanceAdapter(Context context, int resourceId,
+                              List<ItemFinance> items) {
         super(context, resourceId, items);
         this.context = context;
     }
@@ -36,7 +36,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        Item rowItem = getItem(position);
+        ItemFinance rowItem = getItem(position);
 
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -51,12 +51,27 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         } else
             holder = (ViewHolder) convertView.getTag();
 
-        holder.txtDate.setText(rowItem.getdate());
+        holder.txtDate.setText(rowItem.getDate());
         holder.txtTitle.setText(rowItem.getTitle());
-        holder.txtMoney.setText(rowItem.getTitle());
-        holder.imageView.setImageResource(rowItem.getImageId());
+        holder.txtMoney.setText(String.valueOf(rowItem.getMoney()));
+        holder.imageView.setImageResource(getImageId(rowItem.getType()));
 
         return convertView;
+    }
+
+    private int getImageId(String type){
+        switch(type){
+            case "shopping":
+                return R.drawable.shopping;
+            case "cinema":
+                return R.drawable.cinema;
+            case "salary":
+                return R.drawable.salary;
+            case "party":
+                return R.drawable.party;
+            default:
+                return R.drawable.other;
+        }
     }
 
 }

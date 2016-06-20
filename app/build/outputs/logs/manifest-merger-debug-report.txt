@@ -79,6 +79,7 @@ MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\my
 MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:5:5-43
 MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\AndroidManifest.xml:20:5-43
+MERGED from [info.hoang8f:android-segmented:1.0.6] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\info.hoang8f\android-segmented\1.0.6\AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion
 		INJECTED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml

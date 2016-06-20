@@ -9,4 +9,103 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.yobbopel.myapplication.AddNewActivity">
 
+    <info.hoang8f.android.segmented.SegmentedGroup
+        xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/segmented"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="2dp"
+        segmentedgroup:sc_corner_radius="10dp"
+        segmentedgroup:sc_tint_color="@color/colorAccent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/btn_income"
+            android:layout_width="@dimen/switch_size"
+            android:layout_height="wrap_content"
+            android:text="Income"
+            style="@style/RadioButton"
+            android:layout_weight="1"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/btn_expense"
+            android:layout_width="@dimen/switch_size"
+            android:layout_height="wrap_content"
+            android:text="Expense"
+            style="@style/RadioButton"
+            android:layout_weight="1"
+            android:checked="false" />
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0,000 VND"
+        android:id="@+id/txt_set_money"
+        android:layout_below="@+id/segmented"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        android:textSize="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Note"
+        android:id="@+id/textView"
+        android:textColor="#000000"
+        android:textSize="25dp"
+        android:layout_below="@+id/txt_set_money"
+        android:layout_marginLeft="10dp"
+        android:layout_margin="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Date"
+        android:id="@+id/textView2"
+        android:textColor="#000000"
+        android:textSize="25dp"
+        android:layout_below="@+id/textView"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Catelory"
+        android:id="@+id/textView4"
+        android:textColor="#000000"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_note"
+        android:text="note"
+        android:layout_below="@+id/txt_set_money"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4" />
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/edit_note"
+        android:layout_alignStart="@+id/edit_note"
+        android:layout_below="@+id/textView4" />
+
 </RelativeLayout>

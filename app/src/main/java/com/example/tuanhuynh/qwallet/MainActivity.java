@@ -1,6 +1,7 @@
 package com.example.tuanhuynh.qwallet;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,43 +14,37 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.tuanhuynh.qwallet.adapter.ItemAdapter;
-import com.example.tuanhuynh.qwallet.objects.Item;
+import com.example.tuanhuynh.qwallet.adapter.ItemFinanceAdapter;
+import com.example.tuanhuynh.qwallet.database.MyDatabaseHelper;
+import com.example.tuanhuynh.qwallet.objects.ItemFinance;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity implements
-        AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
-
-    public static final String[] titles = new String[] { "Strawberry",
-            "Banana", "Orange", "Mixed" };
-
-    public static final String[] descriptions = new String[] {
-            "It is an aggregate accessory fruit",
-            "It is the largest herbaceous flowering plant", "Citrus Fruit",
-            "Mixed Fruits" };
-
-    public static final Integer[] images = { R.drawable.report,
-            R.drawable.report, R.drawable.report, R.drawable.report };
+    AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     ListView listView;
-    List<Item> rowItems;
+    List<ItemFinance> rowItems = new ArrayList<ItemFinance>();
 
-    /** Called when the activity is first created. */
+
+    //Called when the activity is first created
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rowItems = new ArrayList<Item>();
-        for (int i = 0; i < titles.length; i++) {
-            Item item = new Item(images[i], titles[i], descriptions[i]);
-            rowItems.add(item);
-        }
+        //tạo database và thêm vào dữ liệu mặc định
+        MyDatabaseHelper db = new MyDatabaseHelper(this);
+        db.createDefaultToTest();
+        //lấy tất cả dữ liệu đổ vào list
+        //List<ItemFinance> list = db.getAll();
+        //Lấy dữ liệu theo ngày
+        List<ItemFinance> list = db.getByDate("5/5/2015");
+        this.rowItems.addAll(list);
 
         listView = (ListView) findViewById(R.id.list);
-        ItemAdapter adapter = new ItemAdapter(this,
+        ItemFinanceAdapter adapter = new ItemFinanceAdapter(this,
                 R.layout.list_item, rowItems);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
