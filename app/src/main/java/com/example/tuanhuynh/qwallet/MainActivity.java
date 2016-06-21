@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.tuanhuynh.qwallet.adapter.ItemFinanceAdapter;
-import com.example.tuanhuynh.qwallet.database.MyDatabaseHelper;
+import com.example.tuanhuynh.qwallet.database.ItemDatabaseHelper;
 import com.example.tuanhuynh.qwallet.objects.ItemFinance;
 import com.samsistemas.calendarview.widget.CalendarView;
 import com.samsistemas.calendarview.widget.DayView;
@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity implements
     List<ItemFinance> rowItems = new ArrayList<ItemFinance>();
     CalendarView calendarView;
     String dateSelected;
-    MyDatabaseHelper db;
+    ItemDatabaseHelper db;
     ItemFinanceAdapter adapter;
 
 
@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements
         setContentView(R.layout.activity_main);
 
         //tạo database và thêm vào dữ liệu mặc định
-        db = new MyDatabaseHelper(this);
+        db = new ItemDatabaseHelper(this);
         db.createDefaultToTest();
 
         calendarView = (CalendarView) findViewById(R.id.calendar_view);

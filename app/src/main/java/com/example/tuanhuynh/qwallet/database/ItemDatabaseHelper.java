@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by tuan.huynh on 6/20/2016.
  */
-public class MyDatabaseHelper extends SQLiteOpenHelper {
+public class ItemDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "SQLite";
 
@@ -32,12 +32,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_FINANCE = "FinanceTable";
 
     private static final String COLUMN_FINANCE_ID ="Finance_Id";
-    private static final String COLUMN_FINANCE_NOTE ="Finance_Note";
+    private static final String COLUMN_FINANCE_NAME ="Finance_Name";
     private static final String COLUMN_FINANCE_DATE = "Finance_Date";
-    private static final String COLUMN_FINANCE_MONEY = "Finance_Money";
+    private static final String COLUMN_FINANCE_VALUE = "Finance_Value";
     private static final String COLUMN_FINANCE_TYPE = "Finance_Type";
+    private static final String COLUMN_FINANCE_CATELORYID = "Finance_CataloryID";
 
-    public MyDatabaseHelper(Context context) {
+    public ItemDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -48,9 +49,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String script = "CREATE TABLE " + TABLE_FINANCE + "("
                 + COLUMN_FINANCE_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_FINANCE_TYPE + " TEXT,"
-                + COLUMN_FINANCE_NOTE + " TEXT,"
+                + COLUMN_FINANCE_NAME + " TEXT,"
                 + COLUMN_FINANCE_DATE + " TEXT,"
-                + COLUMN_FINANCE_MONEY+ " TEXT" + ")";
+                + COLUMN_FINANCE_VALUE+ " TEXT,"
+                + COLUMN_FINANCE_CATELORYID+ " INTEGER," + ")";
         //String script = "CREATE TABLE FinanceTable (Finance_Id INTEGER PRIMARY KEY,Finance_Type TEXT,Finance_Note TEXT, Finance_Date TEXT, Finance_Money TEXT) ";
         // Chạy lệnh tạo bảng.
         db.execSQL(script);
@@ -73,10 +75,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_FINANCE_NOTE, finance.getTitle());
-        values.put(COLUMN_FINANCE_MONEY, String.valueOf(finance.getMoney()));
+        values.put(COLUMN_FINANCE_NAME, finance.getTitle());
+        values.put(COLUMN_FINANCE_VALUE, String.valueOf(finance.getMoney()));
         values.put(COLUMN_FINANCE_DATE, finance.getDate());
         values.put(COLUMN_FINANCE_TYPE, finance.getType());
+        values.put(COLUMN_FINANCE_CATELORYID, finance.getCategoryID());
 
 
         // Trèn một dòng dữ liệu vào bảng.
@@ -92,7 +95,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_FINANCE, new String[] { COLUMN_FINANCE_ID,COLUMN_FINANCE_TYPE,
-                        COLUMN_FINANCE_NOTE, COLUMN_FINANCE_DATE,COLUMN_FINANCE_MONEY }, COLUMN_FINANCE_ID + "=?",
+                        COLUMN_FINANCE_NAME, COLUMN_FINANCE_DATE,COLUMN_FINANCE_VALUE, COLUMN_FINANCE_CATELORYID }, COLUMN_FINANCE_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -122,6 +125,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 finance.setTitle(cursor.getString(2));
                 finance.setDate(cursor.getString(3));
                 finance.setMoney(Double.parseDouble(cursor.getString(4)));
+                finance.setCategoryID(cursor.getInt(5));
 
                 // Thêm vào danh sách.
                 list.add(finance);
@@ -151,7 +155,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 finance.setTitle(cursor.getString(2));
                 finance.setDate(cursor.getString(3));
                 finance.setMoney(Double.parseDouble(cursor.getString(4)));
-
+                finance.setCategoryID(cursor.getInt(5));
                 // Thêm vào danh sách.
                 list.add(finance);
             } while (cursor.moveToNext());
@@ -183,9 +187,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_FINANCE_TYPE, finance.getType());
-        values.put(COLUMN_FINANCE_NOTE, finance.getTitle());
+        values.put(COLUMN_FINANCE_NAME, finance.getTitle());
         values.put(COLUMN_FINANCE_DATE, finance.getDate());
-        values.put(COLUMN_FINANCE_MONEY, finance.getMoney());
+        values.put(COLUMN_FINANCE_VALUE, finance.getMoney());
+        values.put(COLUMN_FINANCE_CATELORYID, finance.getCategoryID());
 
         // updating row
         return db.update(TABLE_FINANCE, values, COLUMN_FINANCE_ID + " = ?",
@@ -206,8 +211,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void createDefaultToTest()  {
         int count = this.getCount();
         if(count ==0 ) {
-            ItemFinance f1 = new ItemFinance("cinema","Xem phim","06/06/2016",200000);
-            ItemFinance f2 = new ItemFinance("orther","Trúng số","16/06/2016",1000000);
+            ItemFinance f1 = new ItemFinance("income","Xem phim","06/06/2016",200000,1);
+            ItemFinance f2 = new ItemFinance("expense","Trúng số","16/06/2016",1000000,4);
             this.addFinance(f1);
             this.addFinance(f2);
         }

@@ -11,14 +11,10 @@ public class ItemFinance {
     private String title;
     private String date;
     private double money;
+    private int categoryID;
 
     public ItemFinance() {
     }
-//    public ItemFinance(String type, String title, String date) {
-//        this.type = type;
-//        this.title = title;
-//        this.date = date;
-//    }
     public ItemFinance(String type, String title, String date, double money) {
         this.type = type;
         this.title = title;
@@ -31,6 +27,14 @@ public class ItemFinance {
         this.title = title;
         this.date = date;
         this.money = money;
+    }
+
+    public ItemFinance(String type, String title, String date, double money, int categoryID) {
+        this.type = type;
+        this.title = title;
+        this.date = date;
+        this.money = money;
+        this.categoryID = categoryID;
     }
 
     public int getId() {
@@ -63,6 +67,14 @@ public class ItemFinance {
     public void setTitle(String title) {
         this.title = title;
     }
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
+
     @Override
     public String toString() {
         return title + "\n" + date;
