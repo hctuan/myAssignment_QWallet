@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yobbopel.myapplication.AddNewActivity"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -355,17 +354,17 @@
                 android:background="@drawable/number_button_background"
                 >
                 <ImageButton
-                android:id="@+id/btn_backspace"
-                android:textStyle="bold"
-                android:textColor="@color/colorWhite"
-                android:textSize="30dp"
-                android:gravity="center"
-                android:background="@drawable/backspace_button_background"
-                android:src="@drawable/backspace"
-                android:scaleType="centerInside"
-                android:layout_margin="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                    android:id="@+id/btn_backspace"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:background="@drawable/backspace_button_background"
+                    android:src="@drawable/backspace"
+                    android:scaleType="centerInside"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <TextView
                 android:textStyle="bold"

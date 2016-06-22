@@ -51,9 +51,8 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_FINANCE_TYPE + " TEXT,"
                 + COLUMN_FINANCE_NAME + " TEXT,"
                 + COLUMN_FINANCE_DATE + " TEXT,"
-                + COLUMN_FINANCE_VALUE+ " TEXT,"
-                + COLUMN_FINANCE_CATELORYID+ " INTEGER," + ")";
-        //String script = "CREATE TABLE FinanceTable (Finance_Id INTEGER PRIMARY KEY,Finance_Type TEXT,Finance_Note TEXT, Finance_Date TEXT, Finance_Money TEXT) ";
+                + COLUMN_FINANCE_VALUE+ " BIGINT,"
+                + COLUMN_FINANCE_CATELORYID+ " INTEGER" + ")";
         // Chạy lệnh tạo bảng.
         db.execSQL(script);
     }
@@ -100,7 +99,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        ItemFinance finance = new ItemFinance(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), Double.parseDouble(cursor.getString(4)));
+        ItemFinance finance = new ItemFinance(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), Long.parseLong(cursor.getString(4)));
         // return note
         return finance;
     }
@@ -124,7 +123,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 finance.setType(cursor.getString(1));
                 finance.setTitle(cursor.getString(2));
                 finance.setDate(cursor.getString(3));
-                finance.setMoney(Double.parseDouble(cursor.getString(4)));
+                finance.setMoney(Integer.parseInt(cursor.getString(4)));
                 finance.setCategoryID(cursor.getInt(5));
 
                 // Thêm vào danh sách.
@@ -154,7 +153,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 finance.setType(cursor.getString(1));
                 finance.setTitle(cursor.getString(2));
                 finance.setDate(cursor.getString(3));
-                finance.setMoney(Double.parseDouble(cursor.getString(4)));
+                finance.setMoney(Integer.parseInt(cursor.getString(4)));
                 finance.setCategoryID(cursor.getInt(5));
                 // Thêm vào danh sách.
                 list.add(finance);
@@ -186,6 +185,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(COLUMN_FINANCE_ID,finance.getId());
         values.put(COLUMN_FINANCE_TYPE, finance.getType());
         values.put(COLUMN_FINANCE_NAME, finance.getTitle());
         values.put(COLUMN_FINANCE_DATE, finance.getDate());
@@ -193,8 +193,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_FINANCE_CATELORYID, finance.getCategoryID());
 
         // updating row
-        return db.update(TABLE_FINANCE, values, COLUMN_FINANCE_ID + " = ?",
-                new String[]{String.valueOf(finance.getId())});
+       return db.update(TABLE_FINANCE, values, COLUMN_FINANCE_ID + " = ?", new String[]{finance.getId()+""});
     }
 
     public void deleteNote(ItemFinance finance) {
@@ -211,8 +210,8 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
     public void createDefaultToTest()  {
         int count = this.getCount();
         if(count ==0 ) {
-            ItemFinance f1 = new ItemFinance("income","Xem phim","06/06/2016",200000,1);
-            ItemFinance f2 = new ItemFinance("expense","Trúng số","16/06/2016",1000000,4);
+            ItemFinance f1 = new ItemFinance("expense","Xem phim","06/06/2016",200000,1);
+            ItemFinance f2 = new ItemFinance("income","Trúng số","16/06/2016",1000000,4);
             this.addFinance(f1);
             this.addFinance(f2);
         }

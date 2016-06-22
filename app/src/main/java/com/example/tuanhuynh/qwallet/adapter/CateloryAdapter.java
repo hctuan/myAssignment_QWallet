@@ -55,7 +55,6 @@ public class CateloryAdapter extends BaseAdapter {
         ImageView icon = (ImageView) convertView.findViewById(R.id.img_catelory);
         TextView names = (TextView) convertView.findViewById(R.id.txt_name_catelory);
         icon.setImageResource(getImageId(mIcon[position]));
-        //Toast.makeText(mContext, mName[position], Toast.LENGTH_LONG).show();
         names.setText(mName[position]);
         return convertView;
     }

@@ -15,16 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name="com.example.tuanhuynh.qwallet.MainActivity" >
-        </activity>
-        <activity android:name="com.example.tuanhuynh.qwallet.PasscodeLockActivity" >
-        </activity>
-        <activity android:name="com.example.tuanhuynh.qwallet.AddNewActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.tuanhuynh.qwallet.PasscodeLockActivity" />
+        <activity android:name="com.example.tuanhuynh.qwallet.AddNewActivity" />
+        <activity android:name="com.example.tuanhuynh.qwallet.EditActivity" />
     </application>
 
 </manifest>

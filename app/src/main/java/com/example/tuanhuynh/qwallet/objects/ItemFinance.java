@@ -2,26 +2,22 @@ package com.example.tuanhuynh.qwallet.objects;
 
 import com.example.tuanhuynh.qwallet.R;
 
+import java.io.Serializable;
+
 /**
  * Created by YobboPEL on 18/06/2016.
  */
-public class ItemFinance {
+public class ItemFinance implements Serializable {
     private int id;
     private String type;
     private String title;
     private String date;
-    private double money;
+    private long money;
     private int categoryID;
 
     public ItemFinance() {
     }
-    public ItemFinance(String type, String title, String date, double money) {
-        this.type = type;
-        this.title = title;
-        this.date = date;
-        this.money = money;
-    }
-    public ItemFinance(int id, String type, String title, String date, double money) {
+    public ItemFinance(int id, String type, String title, String date, long money) {
         this.id = id;
         this.type = type;
         this.title = title;
@@ -29,7 +25,7 @@ public class ItemFinance {
         this.money = money;
     }
 
-    public ItemFinance(String type, String title, String date, double money, int categoryID) {
+    public ItemFinance(String type, String title, String date, long money, int categoryID) {
         this.type = type;
         this.title = title;
         this.date = date;
@@ -49,10 +45,10 @@ public class ItemFinance {
     public void setDate(String date) {
         this.date = date;
     }
-    public double getMoney() {
+    public long getMoney() {
         return money;
     }
-    public void setMoney(double money) {
+    public void setMoney(long money) {
         this.money = money;
     }
     public String getType() {
@@ -79,19 +75,4 @@ public class ItemFinance {
     public String toString() {
         return title + "\n" + date;
     }
-
-//    private int getImageId(String type){
-//        switch(type){
-//            case "shop":
-//                return R.drawable.edit;
-//            case "cinema":
-//                return R.drawable.edit;
-//            case "salary":
-//                return R.drawable.edit;
-//            case "wedding":
-//                return R.drawable.edit;
-//            default:
-//                return R.drawable.edit;
-//        }
-//    }
 }

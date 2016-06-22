@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:2:1-26:12
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:2:1-23:12
 	xmlns:android
 		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:2:11-69
 	package
@@ -14,7 +14,7 @@ ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.x
 		INJECTED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml
 application
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:5:5-24:19
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:5:5-21:19
 MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
 MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\AndroidManifest.xml:7:5-20
@@ -41,27 +41,31 @@ MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\my
 	android:theme
 		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:10:9-40
 activity#com.example.tuanhuynh.qwallet.MainActivity
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:9-13:20
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:9-17:20
 	android:name
 		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:19-47
-activity#com.example.tuanhuynh.qwallet.PasscodeLockActivity
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:14:9-16:20
-	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:14:19-55
-activity#com.example.tuanhuynh.qwallet.AddNewActivity
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:17:9-23:20
-	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:17:19-49
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:13-22:29
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:12:13-16:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:19:17-69
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:13:17-69
 	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:19:25-66
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:13:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:21:17-77
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:15:17-77
 	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:21:27-74
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:15:27-74
+activity#com.example.tuanhuynh.qwallet.PasscodeLockActivity
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:9-67
+	android:name
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:19-55
+activity#com.example.tuanhuynh.qwallet.AddNewActivity
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:19:9-61
+	android:name
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:19:19-49
+activity#com.example.tuanhuynh.qwallet.EditActivity
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:20:9-59
+	android:name
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:20:19-47
 uses-sdk
 INJECTED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\tuan.huynh\myApp\myAssignment\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\AndroidManifest.xml:21:5-23:78

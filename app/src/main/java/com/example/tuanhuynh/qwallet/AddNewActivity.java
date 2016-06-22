@@ -2,6 +2,7 @@ package com.example.tuanhuynh.qwallet;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,19 +20,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tuanhuynh.qwallet.adapter.CateloryAdapter;
+import com.example.tuanhuynh.qwallet.adapter.ItemFinanceAdapter;
 import com.example.tuanhuynh.qwallet.database.CateloryDatabaseHelper;
 import com.example.tuanhuynh.qwallet.database.ItemDatabaseHelper;
 import com.example.tuanhuynh.qwallet.objects.Catelories;
 import com.example.tuanhuynh.qwallet.objects.ItemFinance;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class AddNewActivity extends AppCompatActivity {
 
     private GridView gridView;
+    private String choose;
     private String action = "income";
 
     private DatePicker datePicker;
@@ -43,33 +51,57 @@ public class AddNewActivity extends AppCompatActivity {
     private List<Catelories> listOfSpinner = new ArrayList<Catelories>();
     private TextView btn_income;
     private TextView btn_expense;
-    ArrayList<String> valueMoney;
-    EditText editName;
-    EditText editDate;
-    CateloryDatabaseHelper cateloryDatabaseHelper;
-    TextView btn_1;
-    TextView btn_2;
-    TextView btn_3;
-    TextView btn_4;
-    TextView btn_5;
-    TextView btn_6;
-    TextView btn_7;
-    TextView btn_8;
-    TextView btn_9;
-    TextView btn_0;
-    TextView btn_dot;
-    TextView btn_OK;
-    ImageView btn_backspace;
-    TextView txtSetMoney;
+    private ArrayList<String> valueMoney;
+    private EditText editName;
+    private EditText editDate;
+    private CateloryDatabaseHelper cateloryDatabaseHelper;
+    private TextView btn_1;
+    private TextView btn_2;
+    private TextView btn_3;
+    private TextView btn_4;
+    private TextView btn_5;
+    private TextView btn_6;
+    private TextView btn_7;
+    private TextView btn_8;
+    private TextView btn_9;
+    private TextView btn_0;
+    private TextView btn_dot;
+    private TextView btn_OK;
+    private ImageView btn_backspace;
+    private TextView txtSetMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new);
+//
+        choose = "add";
+        Intent intent = getIntent();
+        if(intent.getStringExtra("choose")!=null){
+            choose = intent.getStringExtra("choose");
+        }
+        ItemFinance itemSelected = (ItemFinance)intent.getSerializableExtra("item");
+        Toast.makeText(AddNewActivity.this, choose, Toast.LENGTH_LONG).show();
+
         btn_income = (TextView)findViewById(R.id.txt_income);
         btn_expense = (TextView)findViewById(R.id.txt_expense);
         txtSetMoney = (TextView)findViewById(R.id.txt_set_money);
         final Resources res = null;
+        final TextView set000 = (TextView)findViewById(R.id.txt_set_000);
+        if(choose.equals("edit")){
+            action = itemSelected.getType();
+            if(action.equals("income")){
+                btn_income.setBackgroundResource(R.drawable.incom_button_selected);
+                btn_expense.setBackgroundResource(R.drawable.expense_button_selector);
+                txtSetMoney.setTextColor(getResources().getColor(R.color.colorIncome));
+                set000.setTextColor(getResources().getColor(R.color.colorIncome));
+            } else{
+                btn_expense.setBackgroundResource(R.drawable.expense_button_selected);
+                btn_income.setBackgroundResource(R.drawable.incom_button_selector);
+                txtSetMoney.setTextColor(getResources().getColor(R.color.colorExpense));
+                set000.setTextColor(getResources().getColor(R.color.colorExpense));
+            }
+        }
         btn_income.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +109,7 @@ public class AddNewActivity extends AppCompatActivity {
                 btn_income.setBackgroundResource(R.drawable.incom_button_selected);
                 btn_expense.setBackgroundResource(R.drawable.expense_button_selector);
                 txtSetMoney.setTextColor(getResources().getColor(R.color.colorIncome));
+                set000.setTextColor(getResources().getColor(R.color.colorIncome));
                 Toast.makeText(AddNewActivity.this, "INCOME", Toast.LENGTH_SHORT).show();
             }
         });
@@ -87,16 +120,23 @@ public class AddNewActivity extends AppCompatActivity {
                 btn_expense.setBackgroundResource(R.drawable.expense_button_selected);
                 btn_income.setBackgroundResource(R.drawable.incom_button_selector);
                 txtSetMoney.setTextColor(getResources().getColor(R.color.colorExpense));
+                set000.setTextColor(getResources().getColor(R.color.colorExpense));
                 Toast.makeText(AddNewActivity.this, "EXPENSE", Toast.LENGTH_SHORT).show();
             }
         });
 
         dateView = (EditText) findViewById(R.id.edit_date);
-        calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        showDate(year, month+1, day);
+        if(choose.equals("edit")){
+            String day = itemSelected.getDate();
+            dateView.setText(day);
+            calendar = Calendar.getInstance();
+        } else {
+            calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+            showDate(year, month + 1, day);
+        }
 
         cateloryDatabaseHelper = new CateloryDatabaseHelper(getBaseContext());
         cateloryDatabaseHelper.createDefaultToTest();
@@ -124,7 +164,14 @@ public class AddNewActivity extends AppCompatActivity {
         CateloryAdapter cateloryAdapter = new CateloryAdapter(getApplicationContext(),names,icons);
         spinnerCatelory.setAdapter(cateloryAdapter);
 
-        valueMoney= new ArrayList<String>();
+        if(choose.equals("edit")){
+            String valMon = String.valueOf(itemSelected.getMoney());
+            ArrayList<String> myArraySubstrings = new ArrayList<String>();
+            for(int i =0; i < valMon.length(); i++)
+                myArraySubstrings.add(valMon.substring(i, i+1));
+            valueMoney = myArraySubstrings;
+            txtSetMoney.setText(convertToString(valueMoney));
+        }else valueMoney= new ArrayList<String>();
 
         btn_0 = (TextView)findViewById(R.id.btn_0);
         btn_1 = (TextView)findViewById(R.id.btn_1);
@@ -144,8 +191,10 @@ public class AddNewActivity extends AppCompatActivity {
         btn_0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                valueMoney.add(valueMoney.size(),"0");
-                txtSetMoney.setText(convertToString(valueMoney));
+                if(valueMoney.size()!=0){
+                    valueMoney.add(valueMoney.size(),"0");
+                    txtSetMoney.setText(convertToString(valueMoney));
+                }
             }
         });
         btn_1.setOnClickListener(new View.OnClickListener() {
@@ -228,6 +277,9 @@ public class AddNewActivity extends AppCompatActivity {
             }
         });
         editName = (EditText)findViewById(R.id.edit_name);
+        if(choose.equals("edit")){
+            editName.setText(itemSelected.getTitle());
+        }
         editDate = (EditText)findViewById(R.id.edit_date);
         btn_OK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,11 +292,15 @@ public class AddNewActivity extends AppCompatActivity {
                 {
                     valueOfMoney += s;
                 }
-                double money = Double.parseDouble(valueOfMoney);
+                valueOfMoney = valueOfMoney+"000";
+                Long money = Long.parseLong(valueOfMoney);
                 ItemFinance item = new ItemFinance(catelory,nameOfnote,date,money,getCateloryId(catelory));
                 ItemDatabaseHelper db = new ItemDatabaseHelper(getApplicationContext());
-                db.addFinance(item);
-                Toast.makeText(AddNewActivity.this, catelory, Toast.LENGTH_SHORT).show();
+                if(choose.equals("edit")){
+
+                    Toast.makeText(AddNewActivity.this, db.updateFinance(item)+"", Toast.LENGTH_SHORT).show();
+                }else db.addFinance(item);
+                Toast.makeText(AddNewActivity.this, "Success!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -271,14 +327,14 @@ public class AddNewActivity extends AppCompatActivity {
         String listString = "";
 
         if(list.size()==0){
-            return listString+"0,000 VND";
+            return listString+"0";
         }
 
         for (String s : list)
         {
             listString += s;
         }
-        return listString+",000 VND";
+        return listString+"";
     }
 
     @SuppressWarnings("deprecation")
