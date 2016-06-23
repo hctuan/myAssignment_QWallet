@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.tuanhuynh.qwallet.AddNewActivity;
 import com.example.tuanhuynh.qwallet.MainActivity;
 import com.example.tuanhuynh.qwallet.R;
+import com.example.tuanhuynh.qwallet.ReportActivity;
 
 /**
  * Created by tuan.huynh on 6/22/2016.
@@ -65,17 +66,38 @@ public class SummaryDialog extends DialogFragment {
 
         tvIncom.setText(income);
         tvExpense.setText(expense);
-        //String month = getArguments().getString("month");
-        getDialog().setTitle("Summary for " + income + "  " + expense);
+        final String month = getArguments().getString("title");
+        TextView tvTitle = (TextView)view.findViewById(R.id.tv_month);
+        tvTitle.setText(getNameMonth(month));
 
         Button btnCloseDialog = (Button)view.findViewById(R.id.btn_close_dialog);
         btnCloseDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //openEditActivity();
-                //dismiss();
+                Intent in = new Intent(getContext(), ReportActivity.class);
+                in.putExtra("month",month);
+                in.putExtra("year",getArguments().getString("year"));
+                startActivity(in);
             }
         });
         return view;
+    }
+
+    String getNameMonth(String s){
+        switch (s){
+            case "01": return "January";
+            case "02": return "February";
+            case "03": return "March";
+            case "04": return "April";
+            case "05": return "May";
+            case "06": return "June";
+            case "07": return "July";
+            case "08": return "August";
+            case "09": return "September";
+            case "10": return "October";
+            case "11": return "November";
+            case "12": return "December";
+            default: return "Month";
+        }
     }
 }

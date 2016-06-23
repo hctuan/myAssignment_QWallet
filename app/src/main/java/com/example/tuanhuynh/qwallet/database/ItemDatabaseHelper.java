@@ -99,7 +99,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        ItemFinance finance = new ItemFinance(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), Long.parseLong(cursor.getString(4)));
+        ItemFinance finance = new ItemFinance(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), Long.parseLong(cursor.getString(4)),Integer.parseInt(cursor.getString(5)));
         // return note
         return finance;
     }
@@ -185,7 +185,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_FINANCE_ID,finance.getId());
+        //values.put(COLUMN_FINANCE_ID,finance.getId());
         values.put(COLUMN_FINANCE_TYPE, finance.getType());
         values.put(COLUMN_FINANCE_NAME, finance.getTitle());
         values.put(COLUMN_FINANCE_DATE, finance.getDate());
@@ -205,13 +205,35 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public  List<ItemFinance> getByMonth(String month,String year){
+        List<ItemFinance> listMonth = new ArrayList<ItemFinance>();
+        String selectQuery = "SELECT  * FROM " + TABLE_FINANCE + " WHERE "+COLUMN_FINANCE_DATE+ " LIKE '%" + month+"/"+year+"' ORDER BY "+COLUMN_FINANCE_CATELORYID;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                ItemFinance finance = new ItemFinance();
+                finance.setId(Integer.parseInt(cursor.getString(0)));
+                finance.setType(cursor.getString(1));
+                finance.setTitle(cursor.getString(2));
+                finance.setDate(cursor.getString(3));
+                finance.setMoney(Integer.parseInt(cursor.getString(4)));
+                finance.setCategoryID(cursor.getInt(5));
+                listMonth.add(finance);
+            } while (cursor.moveToNext());
+        }
+
+        // return note list
+        return listMonth;
+    }
+
     // Nếu trong bảng chưa có dữ liệu,
     // chèn vào mặc định 2 bản ghi.
     public void createDefaultToTest()  {
         int count = this.getCount();
         if(count ==0 ) {
-            ItemFinance f1 = new ItemFinance("expense","Xem phim","06/06/2016",200000,1);
-            ItemFinance f2 = new ItemFinance("income","Trúng số","16/06/2016",1000000,4);
+            ItemFinance f1 = new ItemFinance(1,"expense","Xem phim","06/06/2016",200000,1);
+            ItemFinance f2 = new ItemFinance(2,"income","Trúng số","16/06/2016",1000000,4);
             this.addFinance(f1);
             this.addFinance(f2);
         }

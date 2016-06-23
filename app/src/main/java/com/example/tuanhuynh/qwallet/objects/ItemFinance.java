@@ -17,15 +17,9 @@ public class ItemFinance implements Serializable {
 
     public ItemFinance() {
     }
-    public ItemFinance(int id, String type, String title, String date, long money) {
-        this.id = id;
-        this.type = type;
-        this.title = title;
-        this.date = date;
-        this.money = money;
-    }
 
-    public ItemFinance(String type, String title, String date, long money, int categoryID) {
+    public ItemFinance(int id, String type, String title, String date, long money, int categoryID) {
+        this.id = id;
         this.type = type;
         this.title = title;
         this.date = date;

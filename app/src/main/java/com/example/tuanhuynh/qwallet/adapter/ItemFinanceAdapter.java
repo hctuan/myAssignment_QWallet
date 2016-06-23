@@ -13,11 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tuanhuynh.qwallet.AddNewActivity;
+import com.example.tuanhuynh.qwallet.MainActivity;
 import com.example.tuanhuynh.qwallet.R;
+import com.example.tuanhuynh.qwallet.database.CateloryDatabaseHelper;
 import com.example.tuanhuynh.qwallet.database.ItemDatabaseHelper;
 import com.example.tuanhuynh.qwallet.objects.ItemFinance;
 
@@ -49,7 +52,7 @@ public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
         return items;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         final ItemFinance rowItem = getItem(position);
 
@@ -72,7 +75,12 @@ public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
         holder.txtDate.setText(rowItem.getDate());
         holder.txtTitle.setText(rowItem.getTitle());
         holder.txtMoney.setText(String.valueOf(rowItem.getMoney())+" VND");
-        holder.imageView.setImageResource(getImageId(rowItem.getType()));
+        if(rowItem.getType().equals("income")){
+            holder.txtMoney.setTextColor(getContext().getResources().getColor(R.color.selected_day_background));
+        } else holder.txtMoney.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
+        CateloryDatabaseHelper dbCate = new CateloryDatabaseHelper(getContext());
+        String cate = dbCate.getCate(rowItem.getCategoryID());
+        holder.imageView.setImageResource(getImageId(cate));
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,14 +91,17 @@ public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
                 in.putExtra("choose", "edit");
                 in.putExtra("item", itemF);
                 getContext().startActivity(in);
+                MainActivity.fa.finish();
             }
         });
 
+        final View finalConvertView = convertView;
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ItemDatabaseHelper db = new ItemDatabaseHelper(getContext());
                 db.deleteNote(rowItem);
+                ItemFinanceAdapter.this.notifyDataSetChanged();
             }
         });
         return convertView;
@@ -106,6 +117,16 @@ public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
                 return R.drawable.salary;
             case "party":
                 return R.drawable.party;
+            case "school":
+                return R.drawable.school;
+            case "bank":
+                return R.drawable.bank;
+            case "baby":
+                return R.drawable.baby;
+            case "save":
+                return R.drawable.save;
+            case "gas":
+                return R.drawable.gas;
             default:
                 return R.drawable.other;
         }

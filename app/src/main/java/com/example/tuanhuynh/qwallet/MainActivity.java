@@ -1,5 +1,6 @@
 package com.example.tuanhuynh.qwallet;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,12 +44,17 @@ public class MainActivity extends ActionBarActivity implements
     private ItemFinanceAdapter adapter;
     private ImageView imgReport;
     private List<ItemFinance> itemFinanceList;
+    public static Activity fa;
+    private List<ItemFinance> listOfMonth;
+    String monthView;
+    String yearView;
 
     //Called when the activity is first created
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fa = this;
 
         //tạo database và thêm vào dữ liệu mặc định
         db = new ItemDatabaseHelper(this);
@@ -85,12 +94,12 @@ public class MainActivity extends ActionBarActivity implements
 //        });
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date currentDate = new Date(System.currentTimeMillis());
-        String today = df.format(currentDate);
+        String todayString = df.format(currentDate);
         final DayView dayView = calendarView.findViewByDate(new Date(System.currentTimeMillis()));
         if(null != dayView)
-            dateSelected = today;
+            dateSelected = todayString;
 
-        Toast.makeText(MainActivity.this,today, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,today, Toast.LENGTH_SHORT).show();
         //lấy tất cả dữ liệu đổ vào list
         //List<ItemFinance> list = db.getAll();
         //Lấy dữ liệu theo ngày
@@ -104,7 +113,34 @@ public class MainActivity extends ActionBarActivity implements
         listView.setOnItemClickListener(this);
         listView.setOnItemLongClickListener(this);
 
+        Date today = new Date(System.currentTimeMillis());
+        SimpleDateFormat timeFormat  = new SimpleDateFormat("dd/MM/yyyy");
+        monthView = String.valueOf(today.getMonth()+1);
+        if(monthView.length()<2){
+            monthView = "0"+monthView;
+        }
+        yearView = calendarView.getCurrentYear();
+        listOfMonth = db.getByMonth(monthView,yearView);
+        //========================================change month=============================================================
+        calendarView.setOnMonthChangedListener(new CalendarView.OnMonthChangedListener() {
+            @Override
+            public void onMonthChanged(@NonNull Date date) {
+                SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
+                String dmy = simple.format(date);
+                monthView = String.valueOf(date.getMonth() + 1);
+                if (monthView.length() < 2) {
+                    monthView = "0" + monthView;
+                }
+                yearView = String.valueOf(date.getYear() + 1900);
+
+                listOfMonth = db.getByMonth(monthView,yearView);
+                //Toast.makeText(MainActivity.this, dmy +" "+ monthView + " " + yearView, Toast.LENGTH_SHORT).show();
+            }
+        });
+        //============================================================================================================
+
         //======================================================================================[ button Report]=================================
+
         imgReport = (ImageView)findViewById(R.id.img_report);
         imgReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,52 +149,45 @@ public class MainActivity extends ActionBarActivity implements
                 data.putString("month", "aaaaa");
                 long sumIncome = 0;
                 long sumExpense = 0;
-                for (ItemFinance iFinance : db.getByDate(dateSelected)) {
+                for (ItemFinance iFinance : listOfMonth) {
                     if (iFinance.getType().equals("income")) {
-                        sumIncome = sumExpense + iFinance.getMoney();
+                        sumIncome += iFinance.getMoney();
                     } else {
                         sumExpense += iFinance.getMoney();
                     }
                 }
                 data.putLong("income", sumIncome);
                 data.putLong("expense", sumExpense);
+                data.putString("title", monthView);
+                data.putString("year",yearView);
                 SummaryDialog summaryDialog = new SummaryDialog();
                 summaryDialog.setArguments(data);
                 summaryDialog.show(getSupportFragmentManager(), "Summary of month");
             }
         });
-        //=================================================================================
-//        LayoutInflater inf = (LayoutInflater)getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-//        View view = inf.inflate(R.layout.list_item,null);
-//        ImageView imgDelete = (ImageView)view.findViewById(R.id.img_delete);
-//        imgDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(MainActivity.this, "aaaaaaaaaaaa", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        //=====================================================================================================================
     }
 
-    private void reloadListview(){
+    public void reloadListview(){
         // get new modified random data
         List<ItemFinance> newList = db.getByDate(dateSelected);
         // update data in our adapter
         this.adapter.clear();
         this.adapter.addAll(newList);
         // fire the event
-        if(newList.size()<1)
-            Toast.makeText(getBaseContext(), "NULL", Toast.LENGTH_LONG).show();
+        //if(newList.size()<1)
+            //Toast.makeText(getBaseContext(), "NULL", Toast.LENGTH_LONG).show();
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "Item " + (position + 1) + ": " + rowItems.get(position).getMoney(),
-                Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-        toast.show();
+//        Toast toast = Toast.makeText(getApplicationContext(),
+//                "Item " + (position + 1) + ": " + rowItems.get(position).getMoney(),
+//                Toast.LENGTH_SHORT);
+//        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+//        toast.show();
     }
 
 
@@ -191,18 +220,30 @@ public class MainActivity extends ActionBarActivity implements
         //finish();
     }
 
+    private static MainActivity mainActivity = null;
+
+    public static MainActivity getMainActivity() {
+        return mainActivity;
+    }
     //long click item on listview
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "long clicked pos: " + position, Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "long clicked pos: " + position, Toast.LENGTH_LONG).show();
+
         ImageView imgDelete = (ImageView)view.findViewById(R.id.img_delete);
         ImageView imgEdit = (ImageView)view.findViewById(R.id.img_edit);
 
-        imgDelete.setVisibility(View.VISIBLE);
+        //imgDelete.setVisibility(View.VISIBLE);
         imgDelete.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        imgEdit.setVisibility(View.VISIBLE);
+        //imgEdit.setVisibility(View.VISIBLE);
         imgEdit.setBackgroundColor(getResources().getColor(R.color.colorGray));
         //Toast.makeText(this, "long clicked pos: " , Toast.LENGTH_LONG).show();
+        LinearLayout lin = (LinearLayout)findViewById(R.id.layout_item);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.move_to_left);
+        //lin.startAnimation(animation);
+        //view.startAnimation(animation);
+        imgDelete.startAnimation(animation);
+        imgEdit.startAnimation(animation);
         return false;
     }
 }

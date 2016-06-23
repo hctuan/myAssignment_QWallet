@@ -69,6 +69,16 @@ public class CateloryAdapter extends BaseAdapter {
                 return R.drawable.salary;
             case "party":
                 return R.drawable.party;
+            case "school":
+                return R.drawable.school;
+            case "bank":
+                return R.drawable.bank;
+            case "baby":
+                return R.drawable.baby;
+            case "save":
+                return R.drawable.save;
+            case "gas":
+                return R.drawable.gas;
             default:
                 return R.drawable.other;
         }

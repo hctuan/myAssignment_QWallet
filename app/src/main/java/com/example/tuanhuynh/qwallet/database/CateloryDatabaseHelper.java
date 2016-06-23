@@ -105,6 +105,21 @@ public class CateloryDatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public String getCate(int id){
+        String cate=null;
+        List<Catelories> list = new ArrayList<Catelories>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE "+ COLUMN_ID +" = "+ id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                cate = cursor.getString(1);
+            } while (cursor.moveToNext());
+        }
+        return cate;
+    }
+
     public int getCount() {
         Log.i(TAG, "MyDatabaseHelper.getCount ... " );
 
@@ -125,14 +140,26 @@ public class CateloryDatabaseHelper extends SQLiteOpenHelper {
     public void createDefaultToTest()  {
         int count = this.getCount();
         if(count ==0 ) {
-            Catelories f1 = new Catelories(1,"cinema","cinema");
-            Catelories f2 = new Catelories(2,"other","other");
-            Catelories f3 = new Catelories(3,"party","party");
-            Catelories f4 = new Catelories(4,"salary","salary");
+            Catelories f1 = new Catelories(1,"shopping","shopping");
+            Catelories f2 = new Catelories(2,"cinema","cinema");
+            Catelories f3 = new Catelories(3,"salary","salary");
+            Catelories f5 = new Catelories(4,"party","party");
+            Catelories f6 = new Catelories(5,"school","school");
+            Catelories f7 = new Catelories(6,"bank","bank");
+            Catelories f8 = new Catelories(7,"baby","baby");
+            Catelories f9 = new Catelories(8,"save","save");
+            Catelories f10 = new Catelories(9,"gas","gas");
+            Catelories f11 = new Catelories(10,"other","other");
             this.addCatelory(f1);
             this.addCatelory(f2);
             this.addCatelory(f3);
-            this.addCatelory(f4);
+            this.addCatelory(f5);
+            this.addCatelory(f6);
+            this.addCatelory(f7);
+            this.addCatelory(f8);
+            this.addCatelory(f9);
+            this.addCatelory(f10);
+            this.addCatelory(f11);
         }
     }
 }

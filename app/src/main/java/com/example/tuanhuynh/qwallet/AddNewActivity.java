@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,10 +28,12 @@ import com.example.tuanhuynh.qwallet.database.ItemDatabaseHelper;
 import com.example.tuanhuynh.qwallet.objects.Catelories;
 import com.example.tuanhuynh.qwallet.objects.ItemFinance;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -69,6 +73,18 @@ public class AddNewActivity extends AppCompatActivity {
     private TextView btn_OK;
     private ImageView btn_backspace;
     private TextView txtSetMoney;
+    private int tempMoney;
+    String moneyView;
+
+    @Override
+    public void onBackPressed() {
+        if(choose.equals("edit")){
+            Intent in = new Intent(AddNewActivity.this, MainActivity.class);
+            startActivity(in);
+            finish();
+        }
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +96,7 @@ public class AddNewActivity extends AppCompatActivity {
         if(intent.getStringExtra("choose")!=null){
             choose = intent.getStringExtra("choose");
         }
-        ItemFinance itemSelected = (ItemFinance)intent.getSerializableExtra("item");
+        final ItemFinance itemSelected = (ItemFinance)intent.getSerializableExtra("item");
         Toast.makeText(AddNewActivity.this, choose, Toast.LENGTH_LONG).show();
 
         btn_income = (TextView)findViewById(R.id.txt_income);
@@ -106,35 +122,42 @@ public class AddNewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 action = "income";
+                if(itemSelected!=null){ itemSelected.setType(action);}
                 btn_income.setBackgroundResource(R.drawable.incom_button_selected);
                 btn_expense.setBackgroundResource(R.drawable.expense_button_selector);
                 txtSetMoney.setTextColor(getResources().getColor(R.color.colorIncome));
                 set000.setTextColor(getResources().getColor(R.color.colorIncome));
-                Toast.makeText(AddNewActivity.this, "INCOME", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddNewActivity.this, "INCOME", Toast.LENGTH_SHORT).show();
             }
         });
         btn_expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 action = "expense";
+                if(itemSelected!=null){ itemSelected.setType(action);}
                 btn_expense.setBackgroundResource(R.drawable.expense_button_selected);
                 btn_income.setBackgroundResource(R.drawable.incom_button_selector);
                 txtSetMoney.setTextColor(getResources().getColor(R.color.colorExpense));
                 set000.setTextColor(getResources().getColor(R.color.colorExpense));
-                Toast.makeText(AddNewActivity.this, "EXPENSE", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddNewActivity.this, "EXPENSE", Toast.LENGTH_SHORT).show();
             }
         });
 
         dateView = (EditText) findViewById(R.id.edit_date);
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
         if(choose.equals("edit")){
             String day = itemSelected.getDate();
             dateView.setText(day);
-            calendar = Calendar.getInstance();
+            int d,m,y;
+            d=Integer.parseInt(getIntDate(itemSelected.getDate()).get(0));
+            m=Integer.parseInt(getIntDate(itemSelected.getDate()).get(1));
+            y=Integer.parseInt(getIntDate(itemSelected.getDate()).get(2));
+            calendar.set(y,m,d);
+            showDate(y,m,d);
         } else {
-            calendar = Calendar.getInstance();
-            year = calendar.get(Calendar.YEAR);
-            month = calendar.get(Calendar.MONTH);
-            day = calendar.get(Calendar.DAY_OF_MONTH);
             showDate(year, month + 1, day);
         }
 
@@ -157,17 +180,22 @@ public class AddNewActivity extends AppCompatActivity {
         icons = listName.toArray(icons);
 
         //Catelories[] listCate = (Catelories[])list.toArray();
+        //==================================================================================Spinner================================
         listOfSpinner.addAll(list);
 
         spinnerCatelory = (Spinner)findViewById(R.id.spinner_catelory);
 
         CateloryAdapter cateloryAdapter = new CateloryAdapter(getApplicationContext(),names,icons);
         spinnerCatelory.setAdapter(cateloryAdapter);
+        if(choose.equals("edit")){
+            spinnerCatelory.setSelection(itemSelected.getCategoryID()-1);
+        }
+        //=====================================================================================================================
 
         if(choose.equals("edit")){
             String valMon = String.valueOf(itemSelected.getMoney());
             ArrayList<String> myArraySubstrings = new ArrayList<String>();
-            for(int i =0; i < valMon.length(); i++)
+            for(int i =0; i < valMon.length()-3; i++)
                 myArraySubstrings.add(valMon.substring(i, i+1));
             valueMoney = myArraySubstrings;
             txtSetMoney.setText(convertToString(valueMoney));
@@ -263,17 +291,40 @@ public class AddNewActivity extends AppCompatActivity {
         btn_dot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                valueMoney.add(valueMoney.size(),",");
+                valueMoney.add(valueMoney.size(), ",");
                 txtSetMoney.setText(convertToString(valueMoney));
             }
         });
         btn_backspace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(valueMoney.size()>0){
-                    valueMoney.remove(valueMoney.size()-1);
+                if (valueMoney.size() > 0) {
+                    valueMoney.remove(valueMoney.size() - 1);
                 }
                 txtSetMoney.setText(convertToString(valueMoney));
+            }
+        });
+        moneyView = txtSetMoney.getText().toString();
+        txtSetMoney.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(moneyView.length()>txtSetMoney.length()){
+                    tempMoney--;
+                }else tempMoney++;
+                if(tempMoney>3){
+                    moneyView = txtSetMoney.getText().toString();
+                    txtSetMoney.setText(moneyView+".");
+                    tempMoney=0;
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         editName = (EditText)findViewById(R.id.edit_name);
@@ -294,13 +345,24 @@ public class AddNewActivity extends AppCompatActivity {
                 }
                 valueOfMoney = valueOfMoney+"000";
                 Long money = Long.parseLong(valueOfMoney);
-                ItemFinance item = new ItemFinance(catelory,nameOfnote,date,money,getCateloryId(catelory));
-                ItemDatabaseHelper db = new ItemDatabaseHelper(getApplicationContext());
-                if(choose.equals("edit")){
 
-                    Toast.makeText(AddNewActivity.this, db.updateFinance(item)+"", Toast.LENGTH_SHORT).show();
-                }else db.addFinance(item);
-                Toast.makeText(AddNewActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                ItemDatabaseHelper db = new ItemDatabaseHelper(getApplicationContext());
+                List<ItemFinance> listToCheck = db.getAll();
+                int idOfItem = listToCheck.get(listToCheck.size()-1).getId();
+                //int a;
+
+                if(choose.equals("edit")){
+                    ItemFinance item = new ItemFinance(itemSelected.getId(),action,nameOfnote,date,money,getCateloryId(catelory));
+                    db.updateFinance(item);
+                    //Toast.makeText(AddNewActivity.this, db.updateFinance(item)+"", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(AddNewActivity.this, getCateloryId(catelory)+"", Toast.LENGTH_SHORT).show();
+                    ItemFinance item = new ItemFinance(idOfItem+1,action,nameOfnote,date,money,getCateloryId(catelory));
+                    db.addFinance(item);
+                }
+                Intent in = new Intent(AddNewActivity.this, MainActivity.class);
+                startActivity(in);
+                finish();
             }
         });
 
@@ -308,7 +370,7 @@ public class AddNewActivity extends AppCompatActivity {
     }
 
     int getCateloryId(String s){
-        switch (s) {
+        switch(s){
             case "shopping":
                 return 1;
             case "cinema":
@@ -317,10 +379,18 @@ public class AddNewActivity extends AppCompatActivity {
                 return 3;
             case "party":
                 return 4;
-            case "other":
+            case "school":
                 return 5;
+            case "bank":
+                return 6;
+            case "baby":
+                return 7;
+            case "save":
+                return 8;
+            case "gas":
+                return 9;
             default:
-                return 5;
+                return 10;
         }
     }
     String convertToString(ArrayList<String> list){
@@ -340,13 +410,11 @@ public class AddNewActivity extends AppCompatActivity {
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
         showDialog(999);
-        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
-                .show();
+//        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
         if (id == 999) {
             return new DatePickerDialog(this, myDateListener, year, month, day);
         }
@@ -356,7 +424,6 @@ public class AddNewActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-            // TODO Auto-generated method stub
             // arg1 = year
             // arg2 = month
             // arg3 = day
@@ -375,4 +442,19 @@ public class AddNewActivity extends AppCompatActivity {
         else dateView.setText(new StringBuilder().append(day).append("/")
                     .append(month).append("/").append(year));
     }
+
+    List<String> getIntDate(String dateInput){
+        List<String> dateSplit = new ArrayList<>(Arrays.asList(dateInput.split("/")));
+        return dateSplit;
+    }
+//    int getIntMonth(String dateInput){
+//        List<String> dateSplit = new ArrayList<>(Arrays.asList(dateInput.split("/")));
+//        String monthString = dateSplit.get(1);
+//        return Integer.parseInt(monthString);
+//    }
+//    int getIntYear(String dateInput){
+//        List<String> dateSplit = new ArrayList<>(Arrays.asList(dateInput.split("/")));
+//        String yearString = dateSplit.get(2);
+//        return Integer.parseInt(yearString);
+//    }
 }
