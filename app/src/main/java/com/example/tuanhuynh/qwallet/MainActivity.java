@@ -1,8 +1,10 @@
 package com.example.tuanhuynh.qwallet;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -16,9 +18,11 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tuanhuynh.qwallet.adapter.ItemFinanceAdapter;
+import com.example.tuanhuynh.qwallet.database.CateloryDatabaseHelper;
 import com.example.tuanhuynh.qwallet.database.ItemDatabaseHelper;
 import com.example.tuanhuynh.qwallet.fragment.SummaryDialog;
 import com.example.tuanhuynh.qwallet.objects.ItemFinance;
@@ -32,6 +36,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class MainActivity extends ActionBarActivity implements
     AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
@@ -48,6 +56,8 @@ public class MainActivity extends ActionBarActivity implements
     private List<ItemFinance> listOfMonth;
     String monthView;
     String yearView;
+    LinearLayout lin;
+    ObjectAnimator objectAnimator;
 
     //Called when the activity is first created
     @Override
@@ -57,6 +67,8 @@ public class MainActivity extends ActionBarActivity implements
         fa = this;
 
         //tạo database và thêm vào dữ liệu mặc định
+        CateloryDatabaseHelper dbCate = new CateloryDatabaseHelper(this);
+        dbCate.createDefaultToTest();
         db = new ItemDatabaseHelper(this);
         db.createDefaultToTest();
 
@@ -77,21 +89,8 @@ public class MainActivity extends ActionBarActivity implements
                 reloadListview();
             }
 
-//            @Override
-//            public void onDateClick(@NonNull Date selectedDate) {
-//                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-//                //textView.setText(df.format(selectedDate));
-//            }
         });
 
-//        calendarView.setOnMonthChangedListener(new CalendarView.OnMonthChangedListener() {
-//            @Override
-//            public void onMonthChanged(@NonNull Date monthDate) {
-//                SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
-//                if (null != actionBar)
-//                    actionBar.setTitle(df.format(monthDate));
-//            }
-//        });
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date currentDate = new Date(System.currentTimeMillis());
         String todayString = df.format(currentDate);
@@ -134,7 +133,6 @@ public class MainActivity extends ActionBarActivity implements
                 yearView = String.valueOf(date.getYear() + 1900);
 
                 listOfMonth = db.getByMonth(monthView,yearView);
-                //Toast.makeText(MainActivity.this, dmy +" "+ monthView + " " + yearView, Toast.LENGTH_SHORT).show();
             }
         });
         //============================================================================================================
@@ -169,31 +167,17 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     public void reloadListview(){
-        // get new modified random data
         List<ItemFinance> newList = db.getByDate(dateSelected);
         // update data in our adapter
         this.adapter.clear();
         this.adapter.addAll(newList);
-        // fire the event
-        //if(newList.size()<1)
-            //Toast.makeText(getBaseContext(), "NULL", Toast.LENGTH_LONG).show();
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
-//        Toast toast = Toast.makeText(getApplicationContext(),
-//                "Item " + (position + 1) + ": " + rowItems.get(position).getMoney(),
-//                Toast.LENGTH_SHORT);
-//        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-//        toast.show();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_main,menu);
+        getMenuInflater().inflate(R.menu.action_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -225,25 +209,22 @@ public class MainActivity extends ActionBarActivity implements
     public static MainActivity getMainActivity() {
         return mainActivity;
     }
-    //long click item on listview
+
+    //================================================================================short and long click item on listview=================================================================
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//        Toast.makeText(this, "long clicked pos: " + position, Toast.LENGTH_LONG).show();
 
-        ImageView imgDelete = (ImageView)view.findViewById(R.id.img_delete);
-        ImageView imgEdit = (ImageView)view.findViewById(R.id.img_edit);
+        lin = (LinearLayout)view.findViewById(R.id.layout_item);
 
-        //imgDelete.setVisibility(View.VISIBLE);
-        imgDelete.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        //imgEdit.setVisibility(View.VISIBLE);
-        imgEdit.setBackgroundColor(getResources().getColor(R.color.colorGray));
-        //Toast.makeText(this, "long clicked pos: " , Toast.LENGTH_LONG).show();
-        LinearLayout lin = (LinearLayout)findViewById(R.id.layout_item);
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.move_to_left);
-        //lin.startAnimation(animation);
-        //view.startAnimation(animation);
-        imgDelete.startAnimation(animation);
-        imgEdit.startAnimation(animation);
+        objectAnimator = ObjectAnimator.ofFloat(lin,"x",-200);
+        objectAnimator.setDuration(800);
+        objectAnimator.start();
+
         return false;
     }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+    }
+    //===============================================================================================================================================
 }

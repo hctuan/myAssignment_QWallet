@@ -73,8 +73,9 @@ public class AddNewActivity extends AppCompatActivity {
     private TextView btn_OK;
     private ImageView btn_backspace;
     private TextView txtSetMoney;
-    private int tempMoney;
-    String moneyView;
+
+    public AddNewActivity() {
+    }
 
     @Override
     public void onBackPressed() {
@@ -304,29 +305,7 @@ public class AddNewActivity extends AppCompatActivity {
                 txtSetMoney.setText(convertToString(valueMoney));
             }
         });
-        moneyView = txtSetMoney.getText().toString();
-        txtSetMoney.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(moneyView.length()>txtSetMoney.length()){
-                    tempMoney--;
-                }else tempMoney++;
-                if(tempMoney>3){
-                    moneyView = txtSetMoney.getText().toString();
-                    txtSetMoney.setText(moneyView+".");
-                    tempMoney=0;
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
         editName = (EditText)findViewById(R.id.edit_name);
         if(choose.equals("edit")){
             editName.setText(itemSelected.getTitle());
@@ -399,12 +378,20 @@ public class AddNewActivity extends AppCompatActivity {
         if(list.size()==0){
             return listString+"0";
         }
-
+        int temp=2-list.size()%3;
+        if(list.size()%3==0){
+            temp -=3;
+        }
         for (String s : list)
         {
-            listString += s;
+            temp++;
+            if(temp==3){
+                listString += ",";
+                listString += s;
+                temp=0;
+            }else listString += s;
         }
-        return listString+"";
+        return listString;
     }
 
     @SuppressWarnings("deprecation")

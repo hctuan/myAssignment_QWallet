@@ -1,6 +1,7 @@
 package com.example.tuanhuynh.qwallet.adapter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -74,7 +75,7 @@ public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
 
         holder.txtDate.setText(rowItem.getDate());
         holder.txtTitle.setText(rowItem.getTitle());
-        holder.txtMoney.setText(String.valueOf(rowItem.getMoney())+" VND");
+        holder.txtMoney.setText(convertToMoneyString(String.valueOf(rowItem.getMoney()))+" VND");
         if(rowItem.getType().equals("income")){
             holder.txtMoney.setTextColor(getContext().getResources().getColor(R.color.selected_day_background));
         } else holder.txtMoney.setTextColor(getContext().getResources().getColor(R.color.colorAccent));
@@ -130,6 +131,33 @@ public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
             default:
                 return R.drawable.other;
         }
+    }
+
+    String convertToMoneyString(String strInput){
+
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i =0; i < strInput.length(); i++)
+            list.add(strInput.substring(i, i+1));
+
+        String listString = "";
+
+        if(list.size()==0){
+            return listString+"0";
+        }
+        int temp=2-list.size()%3;
+        if(list.size()%3==0){
+            temp -=3;
+        }
+        for (String s : list)
+        {
+            temp++;
+            if(temp==3){
+                listString += ",";
+                listString += s;
+                temp=0;
+            }else listString += s;
+        }
+        return listString;
     }
 
 }

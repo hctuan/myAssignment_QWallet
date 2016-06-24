@@ -74,7 +74,7 @@ public class ReportAdapter extends BaseAdapter {
 
             imgCate.setImageResource(getImageId(itemReport.getCate()));
             tvCate.setText(itemReport.getCate());
-            tvBalance.setText(String.valueOf(itemReport.getValue())+ " VND");
+            tvBalance.setText(convertToMoneyString(String.valueOf(itemReport.getValue()))+ " VND");
             if(itemReport.getInOrEx().equals("income")){
                 tvBalance.setTextColor(v.getResources().getColor(R.color.colorIncome));
             } else tvBalance.setTextColor(v.getResources().getColor(R.color.colorExpense));
@@ -84,7 +84,7 @@ public class ReportAdapter extends BaseAdapter {
             TextView tvMoney = (TextView)v.findViewById(R.id.tv_report_detail_money);
             tvTitle.setText(itemReport.getNote());
             tvDate.setText(itemReport.getDate());
-            tvMoney.setText(String.valueOf(itemReport.getValue())+ " VND");
+            tvMoney.setText(convertToMoneyString(String.valueOf(itemReport.getValue()))+ " VND");
             if(itemReport.getInOrEx().equals("income")){
                 tvMoney.setTextColor(v.getResources().getColor(R.color.colorIncome));
             } else tvMoney.setTextColor(v.getResources().getColor(R.color.colorExpense));
@@ -115,5 +115,35 @@ public class ReportAdapter extends BaseAdapter {
             default:
                 return R.drawable.other;
         }
+    }
+
+    String convertToMoneyString(String strInput){
+
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i =0; i < strInput.length(); i++)
+            list.add(strInput.substring(i, i+1));
+
+        String listString = "";
+
+        if(list.size()==0){
+            return listString+"0";
+        }
+        int temp=2-list.size()%3;
+        if(list.get(0).equals("-")){
+            temp -=3;
+        }
+        if(list.size()%3==0){
+            temp -=3;
+        }
+        for (String s : list)
+        {
+            temp++;
+            if(temp==3){
+                listString += ",";
+                listString += s;
+                temp=0;
+            }else listString += s;
+        }
+        return listString;
     }
 }

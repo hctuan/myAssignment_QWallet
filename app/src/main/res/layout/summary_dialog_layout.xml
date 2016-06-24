@@ -10,10 +10,10 @@
         android:gravity="right">
 
         <Button
+            android:background="@drawable/maximize"
             android:id="@+id/btn_close_dialog"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:text="×"
             android:textColor="#9acd32"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
@@ -106,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:text="000000"
                     android:textColor="@color/selected_day_background"
                     android:id="@+id/tv_income" />
@@ -130,7 +130,7 @@
 
                 <TextView
                     android:textColor="@color/colorAccent"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="000000"

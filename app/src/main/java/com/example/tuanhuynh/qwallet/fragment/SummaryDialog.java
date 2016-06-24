@@ -25,6 +25,8 @@ import com.example.tuanhuynh.qwallet.MainActivity;
 import com.example.tuanhuynh.qwallet.R;
 import com.example.tuanhuynh.qwallet.ReportActivity;
 
+import java.util.ArrayList;
+
 /**
  * Created by tuan.huynh on 6/22/2016.
  */
@@ -62,10 +64,10 @@ public class SummaryDialog extends DialogFragment {
         String expense = String.valueOf(valueExpense);
         String income = String.valueOf(valueIncome);
         long valueBalance = valueIncome-valueExpense;
-        tvBalance.setText(String.valueOf(valueBalance));
 
-        tvIncom.setText(income);
-        tvExpense.setText(expense);
+        tvBalance.setText(convertToMoneyString(String.valueOf(valueBalance))+" VND");
+        tvIncom.setText(convertToMoneyString(income)+" VND");
+        tvExpense.setText(convertToMoneyString(expense)+" VND");
         final String month = getArguments().getString("title");
         TextView tvTitle = (TextView)view.findViewById(R.id.tv_month);
         tvTitle.setText(getNameMonth(month));
@@ -99,5 +101,35 @@ public class SummaryDialog extends DialogFragment {
             case "12": return "December";
             default: return "Month";
         }
+    }
+
+    String convertToMoneyString(String strInput){
+
+        ArrayList<String> list = new ArrayList<String>();
+        for(int i =0; i < strInput.length(); i++)
+            list.add(strInput.substring(i, i+1));
+
+        String listString = "";
+
+        if(list.size()==0){
+            return listString+"0";
+        }
+        int temp=2-list.size()%3;
+        if(list.get(0).equals("-")){
+            temp -=3;
+        }
+        if(list.size()%3==0){
+            temp -=3;
+        }
+        for (String s : list)
+        {
+            temp++;
+            if(temp==3){
+                listString += ",";
+                listString += s;
+                temp=0;
+            }else listString += s;
+        }
+        return listString;
     }
 }

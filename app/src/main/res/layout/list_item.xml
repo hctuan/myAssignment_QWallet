@@ -1,73 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_item"
+
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_listview_size"
     android:background="@color/day_disabled_background_color"
     android:weightSum="1"
     android:orientation="horizontal">
-    <ImageView
-        android:src="@drawable/report"
-        android:id="@+id/icon"
-        android:layout_width="@dimen/item_listview_size"
-        android:layout_height="@dimen/item_listview_size"
-        android:contentDescription="aaaaaaaa"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="169dp"
-        android:layout_height="match_parent">
+        android:id="@+id/layout_item"
+        android:orientation="horizontal"
+        android:layout_width="546dp"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <ImageView
+            android:src="@drawable/report"
+            android:id="@+id/icon"
+            android:layout_width="@dimen/item_listview_size"
+            android:layout_height="@dimen/item_listview_size"
+            android:contentDescription="aaaaaaaa"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="169dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Title for take and pay"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/icon"
+                android:layout_toEndOf="@+id/icon"
+                android:layout_alignParentTop="true" />
+
+            <TextView
+                android:text="date of take pay"
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGray"
+                android:textSize="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/icon"
+                android:layout_toEndOf="@+id/icon" />
+        </LinearLayout>
 
         <TextView
-            android:text="Title for take and pay"
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_toRightOf="@+id/icon"
-            android:layout_toEndOf="@+id/icon"
-            android:layout_alignParentTop="true" />
+            android:id="@+id/money"
+            android:layout_width="111dp"
+            android:layout_height="@dimen/item_listview_size"
+            android:text="Money money"
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.20" />
 
-        <TextView
-            android:text="date of take pay"
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorGray"
-            android:textSize="12dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/icon"
-            android:layout_toEndOf="@+id/icon" />
+        <ImageView
+            android:background="@color/colorGray"
+            android:src="@drawable/edit"
+            android:layout_width="@dimen/item_listview_size"
+            android:layout_height="match_parent"
+            android:id="@+id/img_edit"
+            android:padding="15dp"/>
+
+        <ImageView
+            android:background="@color/colorAccent"
+            android:src="@drawable/delete"
+            android:layout_width="@dimen/item_listview_size"
+            android:layout_height="@dimen/item_listview_size"
+            android:id="@+id/img_delete"
+            android:padding="15dp" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/money"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_listview_size"
-        android:text="Money money"
-        android:gravity="center_vertical|right"
-        android:layout_toLeftOf="@+id/img_edit"
-        android:layout_toStartOf="@+id/img_edit"
-        android:paddingRight="8dp"/>
-
-    <ImageView
-        android:background="@color/colorGray"
-        android:src="@drawable/edit"
-        android:layout_width="@dimen/item_listview_size"
-        android:layout_height="@dimen/item_listview_size"
-        android:id="@+id/img_edit"
-        android:padding="15dp"/>
-    <ImageView
-        android:background="@color/colorAccent"
-        android:src="@drawable/delete"
-        android:layout_width="@dimen/item_listview_size"
-        android:layout_height="@dimen/item_listview_size"
-        android:id="@+id/img_delete"
-        android:padding="15dp"/>
 
 </LinearLayout>

@@ -136,20 +136,19 @@ public class CateloryDatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Nếu trong bảng chưa có dữ liệu,
-    // chèn vào mặc định 2 bản ghi.
     public void createDefaultToTest()  {
         int count = this.getCount();
         if(count ==0 ) {
             Catelories f1 = new Catelories(1,"shopping","shopping");
             Catelories f2 = new Catelories(2,"cinema","cinema");
             Catelories f3 = new Catelories(3,"salary","salary");
-            Catelories f5 = new Catelories(4,"party","party");
-            Catelories f6 = new Catelories(5,"school","school");
-            Catelories f7 = new Catelories(6,"bank","bank");
-            Catelories f8 = new Catelories(7,"baby","baby");
-            Catelories f9 = new Catelories(8,"save","save");
-            Catelories f10 = new Catelories(9,"gas","gas");
-            Catelories f11 = new Catelories(10,"other","other");
+            Catelories f4 = new Catelories(4,"party","party");
+            Catelories f5 = new Catelories(5,"school","school");
+            Catelories f6 = new Catelories(6,"bank","bank");
+            Catelories f7 = new Catelories(7,"baby","baby");
+            Catelories f8 = new Catelories(8,"save","save");
+            Catelories f9 = new Catelories(9,"gas","gas");
+            Catelories f10 = new Catelories(10,"other","other");
             this.addCatelory(f1);
             this.addCatelory(f2);
             this.addCatelory(f3);
@@ -159,7 +158,7 @@ public class CateloryDatabaseHelper extends SQLiteOpenHelper {
             this.addCatelory(f8);
             this.addCatelory(f9);
             this.addCatelory(f10);
-            this.addCatelory(f11);
+            this.addCatelory(f4);
         }
     }
 }
