@@ -41,23 +41,23 @@ MERGED from [com.android.support:support-v4:23.4.0] C:\Users\tuan.huynh\myApp\my
 	android:theme
 		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:10:9-40
 activity#com.example.tuanhuynh.qwallet.MainActivity
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:9-17:20
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:9-13:20
 	android:name
 		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:11:19-47
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:12:13-16:29
-action#android.intent.action.MAIN
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:13:17-69
-	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:13:25-66
-category#android.intent.category.LAUNCHER
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:15:17-77
-	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:15:27-74
 activity#com.example.tuanhuynh.qwallet.PasscodeLockActivity
-ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:9-20:20
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:14:9-20:20
 	android:name
-		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:19-55
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:14:19-55
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:15:13-19:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:18:27-74
 activity#com.example.tuanhuynh.qwallet.AddNewActivity
 ADDED from C:\Users\tuan.huynh\myApp\myAssignment\app\src\main\AndroidManifest.xml:21:9-23:20
 	android:name

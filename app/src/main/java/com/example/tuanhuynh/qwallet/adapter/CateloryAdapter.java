@@ -79,6 +79,8 @@ public class CateloryAdapter extends BaseAdapter {
                 return R.drawable.save;
             case "gas":
                 return R.drawable.gas;
+            case "hospital":
+                return R.drawable.hospital;
             default:
                 return R.drawable.other;
         }

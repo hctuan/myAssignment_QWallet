@@ -162,7 +162,8 @@ public class CateloryDatabaseHelper extends SQLiteOpenHelper {
             Catelories f7 = new Catelories(7,"baby","baby");
             Catelories f8 = new Catelories(8,"save","save");
             Catelories f9 = new Catelories(9,"gas","gas");
-            Catelories f10 = new Catelories(10,"other","other");
+            Catelories f10 = new Catelories(10,"hospital","hospital");
+            Catelories f11 = new Catelories(11,"other","other");
             this.addCatelory(f1);
             this.addCatelory(f2);
             this.addCatelory(f3);
@@ -173,6 +174,7 @@ public class CateloryDatabaseHelper extends SQLiteOpenHelper {
             this.addCatelory(f8);
             this.addCatelory(f9);
             this.addCatelory(f10);
+            this.addCatelory(f11);
         }
     }
 }
