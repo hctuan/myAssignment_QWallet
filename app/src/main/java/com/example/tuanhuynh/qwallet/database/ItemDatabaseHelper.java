@@ -51,7 +51,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_FINANCE_TYPE + " TEXT,"
                 + COLUMN_FINANCE_NAME + " TEXT,"
                 + COLUMN_FINANCE_DATE + " TEXT,"
-                + COLUMN_FINANCE_VALUE+ " BIGINT,"
+                + COLUMN_FINANCE_VALUE+ " LONG,"
                 + COLUMN_FINANCE_CATELORYID+ " INTEGER" + ")";
         // Chạy lệnh tạo bảng.
         db.execSQL(script);
@@ -123,7 +123,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 finance.setType(cursor.getString(1));
                 finance.setTitle(cursor.getString(2));
                 finance.setDate(cursor.getString(3));
-                finance.setMoney(Integer.parseInt(cursor.getString(4)));
+                finance.setMoney(Long.parseLong(cursor.getString(4)));
                 finance.setCategoryID(cursor.getInt(5));
 
                 // Thêm vào danh sách.
@@ -153,7 +153,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 finance.setType(cursor.getString(1));
                 finance.setTitle(cursor.getString(2));
                 finance.setDate(cursor.getString(3));
-                finance.setMoney(Integer.parseInt(cursor.getString(4)));
+                finance.setMoney(Long.parseLong(cursor.getString(4)));
                 finance.setCategoryID(cursor.getInt(5));
                 // Thêm vào danh sách.
                 list.add(finance);
@@ -217,7 +217,7 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
                 finance.setType(cursor.getString(1));
                 finance.setTitle(cursor.getString(2));
                 finance.setDate(cursor.getString(3));
-                finance.setMoney(Integer.parseInt(cursor.getString(4)));
+                finance.setMoney(Long.parseLong(cursor.getString(4)));
                 finance.setCategoryID(cursor.getInt(5));
                 listMonth.add(finance);
             } while (cursor.moveToNext());
@@ -232,8 +232,8 @@ public class ItemDatabaseHelper extends SQLiteOpenHelper {
     public void createDefaultToTest()  {
         int count = this.getCount();
         if(count ==0 ) {
-            ItemFinance f1 = new ItemFinance(1,"expense","Xem phim","06/06/2016",200000,1);
-            ItemFinance f2 = new ItemFinance(2,"income","Trúng số","16/06/2016",1000000,4);
+            ItemFinance f1 = new ItemFinance(2,"expense","Xem phim","06/06/2016",200000,1);
+            ItemFinance f2 = new ItemFinance(10,"income","Trúng số","16/06/2016",1000000,4);
             this.addFinance(f1);
             this.addFinance(f2);
         }

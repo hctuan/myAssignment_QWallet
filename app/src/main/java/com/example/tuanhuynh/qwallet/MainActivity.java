@@ -1,12 +1,16 @@
 package com.example.tuanhuynh.qwallet;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,13 +41,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
-public class MainActivity extends ActionBarActivity implements
-    AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class MainActivity extends ActionBarActivity{
 
     private ListView listView;
     private  List<ItemFinance> rowItems = new ArrayList<ItemFinance>();
@@ -57,7 +57,9 @@ public class MainActivity extends ActionBarActivity implements
     String monthView;
     String yearView;
     LinearLayout lin;
-    ObjectAnimator objectAnimator;
+    ObjectAnimator aL;
+    ObjectAnimator aR;
+    View viewSelect;
 
     //Called when the activity is first created
     @Override
@@ -85,7 +87,7 @@ public class MainActivity extends ActionBarActivity implements
             public void onDateSelected(@NonNull Date selectedDate) {
                 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 dateSelected = df.format(selectedDate);
-                Toast.makeText(getBaseContext(), dateSelected, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getBaseContext(), dateSelected, Toast.LENGTH_LONG).show();
                 reloadListview();
             }
 
@@ -109,8 +111,70 @@ public class MainActivity extends ActionBarActivity implements
         adapter = new ItemFinanceAdapter(this,
                 R.layout.list_item, rowItems);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
-        listView.setOnItemLongClickListener(this);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if(viewSelect == view) {
+//                    if (aL != null || aR != null) {
+//                        aL.reverse();
+//                        aR.reverse();
+//                    }
+//                }
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if(viewSelect != view){
+                    if(viewSelect!=null) {
+                        LinearLayout linLSelect = (LinearLayout) viewSelect.findViewById(R.id.layout_item_left);
+                        LinearLayout linRSelect = (LinearLayout) viewSelect.findViewById(R.id.layout_item_right);
+
+                        aL = ObjectAnimator.ofFloat(linLSelect, "x", 0);
+                        aL.setDuration(800);
+                        aL.start();
+                        aR = ObjectAnimator.ofFloat(linRSelect, "x", linLSelect.getWidth());
+                        aR.setDuration(800);
+                        aR.start();
+                    }
+
+                    LinearLayout linL = (LinearLayout)view.findViewById(R.id.layout_item_left);
+                    LinearLayout linR = (LinearLayout)view.findViewById(R.id.layout_item_right);
+
+                    aL = ObjectAnimator.ofFloat(linL,"x",-200);
+                    aL.setDuration(800);
+                    aL.start();
+
+                    aR = ObjectAnimator.ofFloat(linR,"x",linL.getWidth()-200);
+                    aR.setDuration(800);
+                    aR.start();
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            aL.reverse();
+                            aR.reverse();
+                        }
+                    }, 2500);
+                }else{
+                    aL.end();
+                    aR.end();
+                    aL.start();
+                    aR.start();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            aL.reverse();
+                            aR.reverse();
+                        }
+                    }, 2500);
+                }
+                viewSelect=view;
+                return false;
+            }
+        });
 
         Date today = new Date(System.currentTimeMillis());
         SimpleDateFormat timeFormat  = new SimpleDateFormat("dd/MM/yyyy");
@@ -210,21 +274,5 @@ public class MainActivity extends ActionBarActivity implements
         return mainActivity;
     }
 
-    //================================================================================short and long click item on listview=================================================================
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-        lin = (LinearLayout)view.findViewById(R.id.layout_item);
-
-        objectAnimator = ObjectAnimator.ofFloat(lin,"x",-200);
-        objectAnimator.setDuration(800);
-        objectAnimator.start();
-
-        return false;
-    }
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
-    }
-    //===============================================================================================================================================
 }

@@ -28,7 +28,7 @@ public class ReportActivity extends AppCompatActivity {
         Intent in = getIntent();
         String month = in.getStringExtra("month");
         String year = in.getStringExtra("year");
-        Toast.makeText(ReportActivity.this, month+year, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ReportActivity.this, month+year, Toast.LENGTH_SHORT).show();
 
         ItemDatabaseHelper db = new ItemDatabaseHelper(this);
         listItem = db.getByMonth(month,year);
@@ -101,27 +101,8 @@ public class ReportActivity extends AppCompatActivity {
     }
 
     private String getCatelory(int i){
-        switch(i){
-            case 1:
-                return "shopping";
-            case 2:
-                return "cinema";
-            case 3:
-                return "salary";
-            case 4:
-                return "party";
-            case 5:
-                return "school";
-            case 6:
-                return "bank";
-            case 7:
-                return "baby";
-            case 8:
-                return "save";
-            case 9:
-                return "gas";
-            default:
-                return "other";
-        }
+        CateloryDatabaseHelper dbCate = new CateloryDatabaseHelper(getApplicationContext());
+        return dbCate.getCate(i);
+//            1:"shopping";2:"cinema";3:"salary";4:"party";5:"school";6:"bank";7:"baby";8:"save";9:"gas";10:"other";
     }
 }

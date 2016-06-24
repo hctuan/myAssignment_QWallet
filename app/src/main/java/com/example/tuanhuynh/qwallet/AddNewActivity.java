@@ -1,7 +1,9 @@
 package com.example.tuanhuynh.qwallet;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
@@ -98,11 +100,12 @@ public class AddNewActivity extends AppCompatActivity {
             choose = intent.getStringExtra("choose");
         }
         final ItemFinance itemSelected = (ItemFinance)intent.getSerializableExtra("item");
-        Toast.makeText(AddNewActivity.this, choose, Toast.LENGTH_LONG).show();
+//        Toast.makeText(AddNewActivity.this, choose, Toast.LENGTH_LONG).show();
 
         btn_income = (TextView)findViewById(R.id.txt_income);
         btn_expense = (TextView)findViewById(R.id.txt_expense);
         txtSetMoney = (TextView)findViewById(R.id.txt_set_money);
+
         final Resources res = null;
         final TextView set000 = (TextView)findViewById(R.id.txt_set_000);
         if(choose.equals("edit")){
@@ -314,34 +317,47 @@ public class AddNewActivity extends AppCompatActivity {
         btn_OK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameOfnote = editName.getText().toString();
-                String date = editDate.getText().toString();
-                String catelory = spinnerCatelory.getSelectedItem().toString();
-                String valueOfMoney = "";
-                for (String s : valueMoney)
-                {
-                    valueOfMoney += s;
-                }
-                valueOfMoney = valueOfMoney+"000";
-                Long money = Long.parseLong(valueOfMoney);
 
-                ItemDatabaseHelper db = new ItemDatabaseHelper(getApplicationContext());
-                List<ItemFinance> listToCheck = db.getAll();
-                int idOfItem = listToCheck.get(listToCheck.size()-1).getId();
-                //int a;
+                if(valueMoney.size()>11){
+                    new AlertDialog.Builder(AddNewActivity.this)
+                            .setTitle("Wrong number input")
+                            .setMessage("Your money is too big!")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Whatever...
+                                }
+                            }).create().show();
+                }else {
+                    String nameOfnote = editName.getText().toString();
+                    String date = editDate.getText().toString();
+                    String catelory = spinnerCatelory.getSelectedItem().toString();
+                    String valueOfMoney = "";
+                    for (String s : valueMoney) {
+                        valueOfMoney += s;
+                    }
+                    valueOfMoney = valueOfMoney + "000";
+                    Long money = Long.parseLong(valueOfMoney);
 
-                if(choose.equals("edit")){
-                    ItemFinance item = new ItemFinance(itemSelected.getId(),action,nameOfnote,date,money,getCateloryId(catelory));
-                    db.updateFinance(item);
-                    //Toast.makeText(AddNewActivity.this, db.updateFinance(item)+"", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(AddNewActivity.this, getCateloryId(catelory)+"", Toast.LENGTH_SHORT).show();
-                    ItemFinance item = new ItemFinance(idOfItem+1,action,nameOfnote,date,money,getCateloryId(catelory));
-                    db.addFinance(item);
+                    ItemDatabaseHelper db = new ItemDatabaseHelper(getApplicationContext());
+                    List<ItemFinance> listToCheck = db.getAll();
+                    int idOfItem = listToCheck.get(listToCheck.size() - 1).getId();
+                    //int a;
+
+                    if (choose.equals("edit")) {
+                        ItemFinance item = new ItemFinance(itemSelected.getId(), action, nameOfnote, date, money, getCateloryId(catelory));
+                        db.updateFinance(item);
+                        //Toast.makeText(AddNewActivity.this, db.updateFinance(item)+"", Toast.LENGTH_SHORT).show();
+                    } else {
+//                    Toast.makeText(AddNewActivity.this, getCateloryId(catelory)+"", Toast.LENGTH_SHORT).show();
+                        ItemFinance item = new ItemFinance(idOfItem + 1, action, nameOfnote, date, money, getCateloryId(catelory));
+                        db.addFinance(item);
+                    }
+                    Intent in = new Intent(AddNewActivity.this, MainActivity.class);
+                    startActivity(in);
+                    finish();
                 }
-                Intent in = new Intent(AddNewActivity.this, MainActivity.class);
-                startActivity(in);
-                finish();
             }
         });
 
@@ -349,28 +365,8 @@ public class AddNewActivity extends AppCompatActivity {
     }
 
     int getCateloryId(String s){
-        switch(s){
-            case "shopping":
-                return 1;
-            case "cinema":
-                return 2;
-            case "salary":
-                return 3;
-            case "party":
-                return 4;
-            case "school":
-                return 5;
-            case "bank":
-                return 6;
-            case "baby":
-                return 7;
-            case "save":
-                return 8;
-            case "gas":
-                return 9;
-            default:
-                return 10;
-        }
+        CateloryDatabaseHelper dbCate = new CateloryDatabaseHelper(getApplicationContext());
+        return dbCate.getCateID(s);
     }
     String convertToString(ArrayList<String> list){
         String listString = "";

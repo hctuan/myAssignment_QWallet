@@ -38,16 +38,6 @@ public class SummaryDialog extends DialogFragment {
         Dialog dialog = new Dialog(getActivity());
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-//        // Close
-//        dialog.findViewById(R.id.btn_close_dialog);
-//        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//            @Override
-//            public void onCancel(DialogInterface dialog) {
-//                Toast.makeText(getContext(), "??????", Toast.LENGTH_SHORT).show();
-//                dialog.cancel();
-//            }
-//        });
-
         return dialog;
 
     }
@@ -59,8 +49,8 @@ public class SummaryDialog extends DialogFragment {
         TextView tvIncom = (TextView)view.findViewById(R.id.tv_income);
         TextView tvExpense = (TextView)view.findViewById(R.id.tv_expense);
         TextView tvBalance = (TextView)view.findViewById(R.id.tv_balance);
-        long valueIncome = getArguments().getLong("income");
-        long valueExpense = getArguments().getLong("expense");
+        final long valueIncome = getArguments().getLong("income");
+        final long valueExpense = getArguments().getLong("expense");
         String expense = String.valueOf(valueExpense);
         String income = String.valueOf(valueIncome);
         long valueBalance = valueIncome-valueExpense;
@@ -76,10 +66,14 @@ public class SummaryDialog extends DialogFragment {
         btnCloseDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getContext(), ReportActivity.class);
-                in.putExtra("month",month);
-                in.putExtra("year",getArguments().getString("year"));
-                startActivity(in);
+                if(valueIncome==0&&valueExpense==0){
+
+                } else {
+                    Intent in = new Intent(getContext(), ReportActivity.class);
+                    in.putExtra("month", month);
+                    in.putExtra("year", getArguments().getString("year"));
+                    startActivity(in);
+                }
             }
         });
         return view;

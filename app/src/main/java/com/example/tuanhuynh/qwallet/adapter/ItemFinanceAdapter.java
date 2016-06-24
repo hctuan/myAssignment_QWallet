@@ -102,6 +102,8 @@ public class ItemFinanceAdapter extends ArrayAdapter<ItemFinance> {
             public void onClick(View v) {
                 ItemDatabaseHelper db = new ItemDatabaseHelper(getContext());
                 db.deleteNote(rowItem);
+                finalConvertView.animate().setDuration(0).x(-v.getWidth()).alpha(0f);
+                ItemFinanceAdapter.this.remove(ItemFinanceAdapter.this.getItem(position));
                 ItemFinanceAdapter.this.notifyDataSetChanged();
             }
         });

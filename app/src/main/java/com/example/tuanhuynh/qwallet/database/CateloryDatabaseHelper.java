@@ -119,6 +119,20 @@ public class CateloryDatabaseHelper extends SQLiteOpenHelper {
         }
         return cate;
     }
+    public int getCateID(String cate){
+        int cateID = 10;
+        List<Catelories> list = new ArrayList<Catelories>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE "+ COLUMN_Name +" = '"+ cate+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                cateID = Integer.parseInt(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        return cateID;
+    }
 
     public int getCount() {
         Log.i(TAG, "MyDatabaseHelper.getCount ... " );
@@ -152,13 +166,13 @@ public class CateloryDatabaseHelper extends SQLiteOpenHelper {
             this.addCatelory(f1);
             this.addCatelory(f2);
             this.addCatelory(f3);
+            this.addCatelory(f4);
             this.addCatelory(f5);
             this.addCatelory(f6);
             this.addCatelory(f7);
             this.addCatelory(f8);
             this.addCatelory(f9);
             this.addCatelory(f10);
-            this.addCatelory(f4);
         }
     }
 }
